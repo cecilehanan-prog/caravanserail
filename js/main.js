@@ -527,7 +527,7 @@ Z.go('home');
     </svg>`;
   };
   Z.fete = function () {
-    if (Math.random() >= (P.chance || 0.25)) return feteFeriel();
+    if (Math.random() >= (P.chance || 0.5)) return feteFeriel();
     const t = Z.pick(P.phrases);
     setTimeout(() => Z.speak(t, { pitch: 1.1 }), 1800);
     return h('div', { class: 'card fete col center' }, h('div', { class: 'fete-pole' }, Z.svg(dessinPole(P.apparence || {}), 'pole-svg')),

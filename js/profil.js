@@ -159,11 +159,11 @@ var PROFIL = {
       'Un câlin pour le plus savant des papas. Même s\'il le sait déjà.']
   },
 
-  /* --- De temps en temps (1 fête sur 4), Cécile apparaît, vite fait,
+  /* --- De temps en temps (1 fête sur 2), Cécile apparaît, vite fait,
      à la barre de pole fitness. Apparence décrite par Cécile. --- */
   pole: {
     nom: 'Cécile',
-    chance: 0.25,
+    chance: 0.5,
     apparence: { peau: '#f1c7a5', cheveux: '#a47148', meches: '#e9c46a', haut: '#ec4899', short: '#a21caf' },  // châtain clair, mèches blondes, chignon bouclé ; yeux bleu-gris-vert
     phrases: ['Bravo Brahim. Moi aussi, je travaille ma figure : la chaise.',
       'Je passais par là. Bravo. Je repars.',
