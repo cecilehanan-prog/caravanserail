@@ -485,7 +485,7 @@ Z.go('home');
   const P = PROFIL.pole, feteFeriel = Z.fete;
   if (!P) return;
   const dessinPole = (A) => {
-    const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#a47148', meche = A.meches || '#e9c46a';
+    const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#7a5230', meche = A.meches || '#e9c46a';
     const top = A.haut || '#ec4899', short = A.short || '#a21caf';
     const membre = (d, w) => `<path d="${d}" stroke="${skin}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
     /* Guirlande de petites lumières en haut, et quelques-unes sur les côtés */

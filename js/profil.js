@@ -128,7 +128,7 @@ var PROFIL = {
       voix: { hauteur: 1.25, vitesse: 1.0 } },
     { id: 'cecile', nom: 'Cécile', espece: 'humain', roles: ['devoirs'],
       appelle: 'Brahim',
-      couleurs: { peau: '#f1c7a5', cheveux: '#a47148', meches: '#e9c46a', coupe: 'chignon', yeux: '#6f8fa0', tshirt: '#ec4899', motif: '#fbcfe8' },
+      couleurs: { peau: '#f1c7a5', cheveux: '#7a5230', meches: '#e9c46a', coupe: 'chignon', yeux: '#6f8fa0', tshirt: '#ec4899', motif: '#fbcfe8' },
       voix: { hauteur: 1.15, vitesse: 0.95 } }
   ],
 
@@ -170,7 +170,7 @@ var PROFIL = {
   pole: {
     nom: 'Cécile',
     chance: 0.5,
-    apparence: { peau: '#f1c7a5', cheveux: '#a47148', meches: '#e9c46a', haut: '#ec4899', short: '#a21caf' },  // châtain clair, mèches blondes, chignon bouclé ; yeux bleu-gris-vert
+    apparence: { peau: '#f1c7a5', cheveux: '#7a5230', meches: '#e9c46a', haut: '#ec4899', short: '#a21caf' },  // châtain, mèches blondes, chignon bouclé ; yeux bleu-gris-vert
     phrases: ['Bravo Brahim. Moi aussi, je travaille ma figure : la chaise.',
       'Je passais par là. Bravo. Je repars.',
       'Figure de la chaise. Risque évalué, prise vérifiée, document unique à jour.',
