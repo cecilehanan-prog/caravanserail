@@ -43,8 +43,8 @@ var PROFIL = {
 
   id: 'brahim',
 
-  /* --- Brahim : 52 ans, cheveux grisonnants, petites lunettes rondes,
-     bouc et petite barbe bien taillée, grisonnants aussi ; habillé « chill »
+  /* --- Brahim : 52 ans, cheveux bouclés grisonnants, petites lunettes rondes,
+     bouc bien taillé autour de la bouche, grisonnant ; habillé « chill »
      (chemise ouverte sur un t-shirt). Description donnée par Cécile. --- */
   enfant: {
     pseudo: 'Brahim',
@@ -53,13 +53,14 @@ var PROFIL = {
     apparence: {
       peau: '#d9a77c',
       cheveux: '#77716b',
-      coiffure: 'courts',
+      cheveux2: '#a19b94',     // les boucles grisonnantes : deux gris mêlés
+      coiffure: 'boucles',
       yeux: '#3b2416',
       tshirt: '#e5e7eb',
       veste: '#4b6584',
-      barbe: '#9a948d',
-      bouc: '#6b655f',
-      lunettes: '#1f2937'
+      bouc: '#8a847d',         // bouc bien taillé, autour de la bouche, grisonnant
+      lunettes: '#1f2937',
+      petitesLunettes: true
     }
   },
 

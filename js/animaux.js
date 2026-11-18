@@ -120,6 +120,7 @@
         : [50, 70].map(x => `<ellipse cx="${x}" cy="54" rx="3.4" ry="4.2" fill="${k.yeux}"/><circle cx="${x + 1}" cy="52.5" r="1.2" fill="#fff"/>`).join('');
       /* Petit bouc (barbichette au menton + fine moustache) */
       const bouc = k.bouc ? `<path d="M53 73 Q60 71 67 73 Q66 82 60 85 Q54 82 53 73 Z" fill="${k.bouc}"/>
+        <path d="M50.5 65 Q48.5 71 53.5 75 M69.5 65 Q71.5 71 66.5 75" stroke="${k.bouc}" stroke-width="3.2" fill="none" stroke-linecap="round"/>
         <path d="M51 64.5 Q60 61 69 64.5 Q60 63.5 51 64.5 Z" fill="${k.bouc}" stroke="${k.bouc}" stroke-width="1.6" stroke-linejoin="round"/>` : '';
       const barbe = k.barbe ? `<path d="M38 60 Q40 84 60 86 Q80 84 82 60 Q76 74 60 74 Q44 74 38 60 Z" fill="${k.barbe}"/>` : '';
       return `${ombre(36)}
@@ -135,7 +136,9 @@
         ${yeuxH}
         <path d="M60 56 q-3 7 1 8" stroke="#c08a6a" stroke-width="2" fill="none" stroke-linecap="round"/>
         ${barbe}${bouc}
-        ${k.lunettes ? `<circle cx="50" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><circle cx="70" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><path d="M58 54 h4 M42 53 l-5 -1 M78 53 l5 -1" stroke="${k.lunettes}" stroke-width="2.5"/>` : ''}
+        ${k.coupe === 'boucles' ? [[-22, 45], [-19, 37], [-14, 30], [-7, 26], [1, 25], [8, 27], [15, 31], [19, 38], [-9, 31], [0, 29], [9, 31]].map(([x, y], n) => `<circle cx="${60 + x}" cy="${y}" r="4.8" fill="${n % 2 ? (k.cheveux2 || k.cheveux) : k.cheveux}"/>`).join('') : ''}
+        ${k.lunettes && k.petitesLunettes ? `<circle cx="50" cy="54" r="5.8" fill="rgba(255,255,255,.2)" stroke="${k.lunettes}" stroke-width="1.8"/><circle cx="70" cy="54" r="5.8" fill="rgba(255,255,255,.2)" stroke="${k.lunettes}" stroke-width="1.8"/><path d="M56 53 q4 -2 8 0 M44 53 l-7 -1 M76 53 l7 -1" stroke="${k.lunettes}" stroke-width="1.8" fill="none"/>` : ''}
+        ${k.lunettes && !k.petitesLunettes ? `<circle cx="50" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><circle cx="70" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><path d="M58 54 h4 M42 53 l-5 -1 M78 53 l5 -1" stroke="${k.lunettes}" stroke-width="2.5"/>` : ''}
         <path d="M52 68 q8 6 16 0" stroke="#9a3b2b" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
     },
     oiseau(k, mood) {

@@ -872,19 +872,25 @@ function dessinAdulte(o) {
   const decor = etagere(4, 50) + etagere(164, 52)
     + (a === 'plante' ? `<path d="M29 18 q-10 -14 -2 -16 q4 8 2 16 M29 18 q8 -16 14 -10 q-6 4 -14 10" fill="#16a34a"/><rect x="22" y="12" width="14" height="8" rx="2" fill="#e5e7eb" stroke="#9ca3af"/>` : '')
     + (a === 'tasse' ? `<path d="M182 4 q3 -4 0 -8 M188 4 q3 -4 0 -8" stroke="#94a3b8" stroke-width="1.4" fill="none"/><path d="M180 6 h12 l-2 12 h-8 z" fill="#fde68a" stroke="#b45309" stroke-width="1"/>` : '');
-  /* La tête : cheveux courts, petite barbe taillée, moustache */
+  /* Cheveux bouclés et grisonnants : des petites boucles de deux gris */
+  const gris2 = A.cheveux2 || hair;
+  const boucles = `<path d="M${cx - 15} ${hy - 2} Q${cx} ${hy - 22} ${cx + 15} ${hy - 2} Q${cx + 9} ${hy - 9} ${cx} ${hy - 9} Q${cx - 9} ${hy - 9} ${cx - 15} ${hy - 2} Z" fill="${hair}"/>`
+    + [[-13.8, -4.4], [-12.4, -8.6], [-9.7, -12.1], [-6.1, -14.6], [-1.9, -15.9], [2.4, -15.8], [6.6, -14.4], [10.1, -11.7], [12.6, -8.1], [13.9, -3.9], [-6, -11], [0, -12.5], [6, -11]]
+      .map(([x, y], n) => `<circle cx="${cx + x}" cy="${hy + y}" r="3.1" fill="${n % 2 ? gris2 : hair}"/>`).join('');
+  /* La tête : cheveux bouclés, lunettes rondes, bouc autour de la bouche */
   const tete = `<rect x="${cx - 5}" y="${hy + 12}" width="10" height="10" fill="${skin}"/>
     <circle cx="${cx - 15}" cy="${hy + 1}" r="3.2" fill="${skin}"/><circle cx="${cx + 15}" cy="${hy + 1}" r="3.2" fill="${skin}"/>
     <ellipse cx="${cx}" cy="${hy}" rx="15" ry="16.5" fill="${skin}"/>
-    <path d="M${cx - 15} ${hy + 1} Q${cx - 13} ${hy + 15} ${cx} ${hy + 17.5} Q${cx + 13} ${hy + 15} ${cx + 15} ${hy + 1} Q${cx + 14} ${hy + 9} ${cx + 7} ${hy + 10.5} Q${cx} ${hy + 8.5} ${cx - 7} ${hy + 10.5} Q${cx - 14} ${hy + 9} ${cx - 15} ${hy + 1} Z" fill="${beard}"/>
+    ${A.barbe ? `<path d="M${cx - 15} ${hy + 1} Q${cx - 13} ${hy + 15} ${cx} ${hy + 17.5} Q${cx + 13} ${hy + 15} ${cx + 15} ${hy + 1} Q${cx + 14} ${hy + 9} ${cx + 7} ${hy + 10.5} Q${cx} ${hy + 8.5} ${cx - 7} ${hy + 10.5} Q${cx - 14} ${hy + 9} ${cx - 15} ${hy + 1} Z" fill="${beard}"/>` : ''}
     <path d="M${cx - 6.5} ${hy + 6.8} Q${cx} ${hy + 3.6} ${cx + 6.5} ${hy + 6.8} Q${cx} ${hy + 5.6} ${cx - 6.5} ${hy + 6.8} Z" fill="${bouc}" stroke="${bouc}" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M${cx - 4.5} ${hy + 11.5} Q${cx} ${hy + 10.5} ${cx + 4.5} ${hy + 11.5} Q${cx + 3.5} ${hy + 17} ${cx} ${hy + 18.5} Q${cx - 3.5} ${hy + 17} ${cx - 4.5} ${hy + 11.5} Z" fill="${bouc}"/>
-    <path d="M${cx - 4} ${hy + 9.6} q4 1.6 8 0" stroke="#7f1d1d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M${cx - 5} ${hy + 11.5} Q${cx} ${hy + 10.5} ${cx + 5} ${hy + 11.5} Q${cx + 4} ${hy + 17} ${cx} ${hy + 18.5} Q${cx - 4} ${hy + 17} ${cx - 5} ${hy + 11.5} Z" fill="${bouc}"/>
+    <path d="M${cx - 6.3} ${hy + 7} Q${cx - 7.3} ${hy + 10.5} ${cx - 4.6} ${hy + 12.6} M${cx + 6.3} ${hy + 7} Q${cx + 7.3} ${hy + 10.5} ${cx + 4.6} ${hy + 12.6}" stroke="${bouc}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M${cx - 3.5} ${hy + 9.4} q3.5 1.3 7 0" stroke="#7f1d1d" stroke-width="1.2" fill="none" stroke-linecap="round"/>
     <path d="M${cx - 9} ${hy - 6} h6 M${cx + 3} ${hy - 6} h6" stroke="${hair}" stroke-width="2" stroke-linecap="round"/>
     <ellipse cx="${cx - 5.5}" cy="${hy - 1}" rx="2" ry="2.3" fill="${eyes}"/><ellipse cx="${cx + 5.5}" cy="${hy - 1}" rx="2" ry="2.3" fill="${eyes}"/>
     <path d="M${cx} ${hy} q-1.5 3.5 0 4" stroke="#b07a57" stroke-width="1.2" fill="none"/>
-    ${A.lunettes ? `<circle cx="${cx - 5.5}" cy="${hy - 1}" r="4.6" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.3"/><circle cx="${cx + 5.5}" cy="${hy - 1}" r="4.6" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.3"/><path d="M${cx - 0.9} ${hy - 1.5} h1.8 M${cx - 10} ${hy - 2} l-5 -1 M${cx + 10} ${hy - 2} l5 -1" stroke="${A.lunettes}" stroke-width="1.3"/>` : ''}
-    <path d="M${cx - 15.5} ${hy + 1} Q${cx - 17} ${hy - 19} ${cx} ${hy - 18} Q${cx + 17} ${hy - 19} ${cx + 15.5} ${hy + 1} Q${cx + 13} ${hy - 9} ${cx + 4} ${hy - 11} Q${cx - 8} ${hy - 12} ${cx - 15.5} ${hy + 1} Z" fill="${hair}"/>`;
+    ${A.lunettes ? `<circle cx="${cx - 5.5}" cy="${hy - 1}" r="2.9" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.1"/><circle cx="${cx + 5.5}" cy="${hy - 1}" r="2.9" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.1"/><path d="M${cx - 2.6} ${hy - 1.4} q2.6 -1.2 5.2 0 M${cx - 8.4} ${hy - 1.5} l-6.4 -1 M${cx + 8.4} ${hy - 1.5} l6.4 -1" stroke="${A.lunettes}" stroke-width="1.1" fill="none"/>` : ''}
+    ${A.coiffure === 'boucles' ? boucles : `<path d="M${cx - 15.5} ${hy + 1} Q${cx - 17} ${hy - 19} ${cx} ${hy - 18} Q${cx + 17} ${hy - 19} ${cx + 15.5} ${hy + 1} Q${cx + 13} ${hy - 9} ${cx + 4} ${hy - 11} Q${cx - 8} ${hy - 12} ${cx - 15.5} ${hy + 1} Z" fill="${hair}"/>`}`;
   const acc = {
     bonnet: `<path d="M${cx - 16} ${hy - 6} Q${cx - 16} ${hy - 26} ${cx} ${hy - 26} Q${cx + 16} ${hy - 26} ${cx + 16} ${hy - 6} Z" fill="#b45309"/><rect x="${cx - 17}" y="${hy - 9}" width="34" height="6" rx="3" fill="#92400e"/>`,
     ecouteurs: `<ellipse cx="${cx - 16}" cy="${hy + 3}" rx="2.2" ry="3" fill="#fff" stroke="#cbd5e1"/><ellipse cx="${cx + 16}" cy="${hy + 3}" rx="2.2" ry="3" fill="#fff" stroke="#cbd5e1"/><path d="M${cx - 16} ${hy + 6} v5 M${cx + 16} ${hy + 6} v5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>`,
