@@ -827,14 +827,15 @@ UNIVERS.musique = {
 
 /* =========================================================
    LA BIBLIOTHÈQUE CONNECTÉE (propre à l'appli de Brahim)
-   Un adulte (52 ans), petite barbe, veste moderne, baskets blanches,
+   Un adulte (52 ans) : cheveux grisonnants, lunettes rondes, bouc et petite
+   barbe grisonnants, tenue décontractée, baskets blanches,
    entre deux bibliothèques. Il tient un livre, un iPhone, un iPad
    ou un MacBook. Dessin sans logo, aux couleurs de profil.js.
    ========================================================= */
 function dessinAdulte(o) {
   const A = (PROFIL.enfant && PROFIL.enfant.apparence) || {};
   const skin = A.peau || '#d9a77c', hair = A.cheveux || '#2b1d14', eyes = A.yeux || '#3b2416';
-  const beard = A.barbe || A.bouc || hair, shirt = A.tshirt || '#0f766e', veste = A.veste || '#1f2937';
+  const beard = A.barbe || A.bouc || hair, bouc = A.bouc || beard, shirt = A.tshirt || '#0f766e', veste = A.veste || '#1f2937';
   const cx = o.cx || 104, hy = 30;
   const k = o.model.type, c = o.color.c, a = o.acc.id;
   /* Les bras et les mains, selon l'objet tenu */
@@ -876,14 +877,16 @@ function dessinAdulte(o) {
     <circle cx="${cx - 15}" cy="${hy + 1}" r="3.2" fill="${skin}"/><circle cx="${cx + 15}" cy="${hy + 1}" r="3.2" fill="${skin}"/>
     <ellipse cx="${cx}" cy="${hy}" rx="15" ry="16.5" fill="${skin}"/>
     <path d="M${cx - 15} ${hy + 1} Q${cx - 13} ${hy + 15} ${cx} ${hy + 17.5} Q${cx + 13} ${hy + 15} ${cx + 15} ${hy + 1} Q${cx + 14} ${hy + 9} ${cx + 7} ${hy + 10.5} Q${cx} ${hy + 8.5} ${cx - 7} ${hy + 10.5} Q${cx - 14} ${hy + 9} ${cx - 15} ${hy + 1} Z" fill="${beard}"/>
-    <path d="M${cx - 6.5} ${hy + 6.8} Q${cx} ${hy + 3.6} ${cx + 6.5} ${hy + 6.8} Q${cx} ${hy + 5.6} ${cx - 6.5} ${hy + 6.8} Z" fill="${beard}" stroke="${beard}" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M${cx - 6.5} ${hy + 6.8} Q${cx} ${hy + 3.6} ${cx + 6.5} ${hy + 6.8} Q${cx} ${hy + 5.6} ${cx - 6.5} ${hy + 6.8} Z" fill="${bouc}" stroke="${bouc}" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M${cx - 4.5} ${hy + 11.5} Q${cx} ${hy + 10.5} ${cx + 4.5} ${hy + 11.5} Q${cx + 3.5} ${hy + 17} ${cx} ${hy + 18.5} Q${cx - 3.5} ${hy + 17} ${cx - 4.5} ${hy + 11.5} Z" fill="${bouc}"/>
     <path d="M${cx - 4} ${hy + 9.6} q4 1.6 8 0" stroke="#7f1d1d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
     <path d="M${cx - 9} ${hy - 6} h6 M${cx + 3} ${hy - 6} h6" stroke="${hair}" stroke-width="2" stroke-linecap="round"/>
     <ellipse cx="${cx - 5.5}" cy="${hy - 1}" rx="2" ry="2.3" fill="${eyes}"/><ellipse cx="${cx + 5.5}" cy="${hy - 1}" rx="2" ry="2.3" fill="${eyes}"/>
     <path d="M${cx} ${hy} q-1.5 3.5 0 4" stroke="#b07a57" stroke-width="1.2" fill="none"/>
+    ${A.lunettes ? `<circle cx="${cx - 5.5}" cy="${hy - 1}" r="4.6" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.3"/><circle cx="${cx + 5.5}" cy="${hy - 1}" r="4.6" fill="rgba(255,255,255,.18)" stroke="${A.lunettes}" stroke-width="1.3"/><path d="M${cx - 0.9} ${hy - 1.5} h1.8 M${cx - 10} ${hy - 2} l-5 -1 M${cx + 10} ${hy - 2} l5 -1" stroke="${A.lunettes}" stroke-width="1.3"/>` : ''}
     <path d="M${cx - 15.5} ${hy + 1} Q${cx - 17} ${hy - 19} ${cx} ${hy - 18} Q${cx + 17} ${hy - 19} ${cx + 15.5} ${hy + 1} Q${cx + 13} ${hy - 9} ${cx + 4} ${hy - 11} Q${cx - 8} ${hy - 12} ${cx - 15.5} ${hy + 1} Z" fill="${hair}"/>`;
   const acc = {
-    lunettes: `<rect x="${cx - 11}" y="${hy - 4.5}" width="9" height="7" rx="3" fill="rgba(255,255,255,.2)" stroke="#111827" stroke-width="1.4"/><rect x="${cx + 2}" y="${hy - 4.5}" width="9" height="7" rx="3" fill="rgba(255,255,255,.2)" stroke="#111827" stroke-width="1.4"/><path d="M${cx - 2} ${hy - 1.5} h4 M${cx - 11} ${hy - 2} l-4 -1 M${cx + 11} ${hy - 2} l4 -1" stroke="#111827" stroke-width="1.4"/>`,
+    bonnet: `<path d="M${cx - 16} ${hy - 6} Q${cx - 16} ${hy - 26} ${cx} ${hy - 26} Q${cx + 16} ${hy - 26} ${cx + 16} ${hy - 6} Z" fill="#b45309"/><rect x="${cx - 17}" y="${hy - 9}" width="34" height="6" rx="3" fill="#92400e"/>`,
     ecouteurs: `<ellipse cx="${cx - 16}" cy="${hy + 3}" rx="2.2" ry="3" fill="#fff" stroke="#cbd5e1"/><ellipse cx="${cx + 16}" cy="${hy + 3}" rx="2.2" ry="3" fill="#fff" stroke="#cbd5e1"/><path d="M${cx - 16} ${hy + 6} v5 M${cx + 16} ${hy + 6} v5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>`,
     casque: `<path d="M${cx - 17} ${hy + 2} Q${cx - 19} ${hy - 24} ${cx} ${hy - 24} Q${cx + 19} ${hy - 24} ${cx + 17} ${hy + 2}" stroke="#cbd5e1" stroke-width="4" fill="none"/><rect x="${cx - 22}" y="${hy - 6}" width="8" height="14" rx="3.5" fill="#e5e7eb" stroke="#94a3b8"/><rect x="${cx + 14}" y="${hy - 6}" width="8" height="14" rx="3.5" fill="#e5e7eb" stroke="#94a3b8"/>`
   }[a] || '';
@@ -895,8 +898,8 @@ function dessinAdulte(o) {
     <rect x="${cx - 16}" y="100" width="14" height="62" rx="4" fill="#334155"/><rect x="${cx + 2}" y="100" width="14" height="62" rx="4" fill="#334155"/>
     <path d="M${cx - 20} 166 q0 -7 11 -7 q6 0 7 7 z M${cx + 2} 166 q1 -7 7 -7 q11 0 11 7 z" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/><path d="M${cx - 20} 166 h18 M${cx + 2} 166 h18" stroke="#94a3b8" stroke-width="2"/>
     <rect x="${cx - 19}" y="52" width="38" height="54" rx="9" fill="${veste}"/>
-    <path d="M${cx - 7} 52 L${cx} 66 L${cx + 7} 52 Z M${cx - 7} 53 h14 v50 h-14 z" fill="${shirt}"/>
-    <path d="M${cx - 8} 52 L${cx - 2} 74 M${cx + 8} 52 L${cx + 2} 74" stroke="#0b1220" stroke-width="1.5"/>
+    <path d="M${cx - 9} 52 h18 v51 h-18 z" fill="${shirt}"/><path d="M${cx - 5} 52 q5 5 10 0" stroke="${skin}" stroke-width="3" fill="none"/>
+    <path d="M${cx - 9} 52 v51 M${cx + 9} 52 v51" stroke="rgba(0,0,0,.25)" stroke-width="1.2"/><path d="M${cx - 9} 52 l-4 8 l4 3 M${cx + 9} 52 l4 8 l-4 3" stroke="rgba(0,0,0,.3)" stroke-width="1.2" fill="none"/>
     ${manche(armL)}${manche(armR)}
     ${objet}
     <circle cx="${hL[0]}" cy="${hL[1]}" r="5" fill="${skin}"/><circle cx="${hR[0]}" cy="${hR[1]}" r="5" fill="${skin}"/>${montre}
@@ -929,7 +932,7 @@ UNIVERS.bibliotheque = {
       { id: 'or', name: 'Or', c: '#e6c79c', price: 120 }] },
     { id: 'acc', label: '✨ Style', items: [
       { id: 'aucun', name: 'Tout simple', price: 0 },
-      { id: 'lunettes', name: 'Lunettes de lecture', price: 30 },
+      { id: 'bonnet', name: 'Bonnet du dimanche', price: 30 },
       { id: 'tasse', name: 'Thé à la menthe', price: 30 },
       { id: 'ecouteurs', name: 'Écouteurs sans fil', price: 50 },
       { id: 'montre', name: 'Montre connectée', price: 70 },

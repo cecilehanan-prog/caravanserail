@@ -591,3 +591,5 @@ body.adapt-tdah .screen .guide-says { grid-template-columns: 1fr; }
 .scene.scene-bibliotheque .sun, .scene.scene-bibliotheque .cloud { display: none; }
 .scene.scene-bibliotheque .ground { background: repeating-linear-gradient(90deg, #d6c3a5 0 50px, #c8b393 50px 52px); border-top-color: #a8916f; animation: none; }
 .scene.scene-bibliotheque .rider { animation: none; }
+.fete-pole .pole-svg svg { width: 150px; transform-origin: 52% 50%; animation: pole-tour 2.6s ease-in-out 1; }
+@keyframes pole-tour { 0% { transform: translateY(-30px) rotate(-14deg); opacity: 0; } 30% { opacity: 1; } 60% { transform: translateY(6px) rotate(6deg); } 100% { transform: none; } }

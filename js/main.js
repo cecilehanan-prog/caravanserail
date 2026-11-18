@@ -473,3 +473,41 @@ function transferCard() {
 
 /* Démarrage */
 Z.go('home');
+
+/* =========================================================
+   APPLI DE BRAHIM : de temps en temps, quand la fête s'affiche,
+   c'est Cécile qui apparaît, vite fait, à la barre de pole fitness
+   (figure de « la chaise »). Tenue de sport, dessin sobre.
+   PROFIL.pole = { nom, chance, apparence, phrases }
+   ========================================================= */
+(function () {
+  const P = PROFIL.pole, feteFeriel = Z.fete;
+  if (!P) return;
+  const dessinPole = (A) => {
+    const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#6b4423', top = A.haut || '#0d9488', bas = A.bas || '#1f2937';
+    const membre = (d, c, w) => `<path d="${d}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+    return `<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="barre" x1="0" x2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset=".5" stop-color="#f9fafb"/><stop offset="1" stop-color="#6b7280"/></linearGradient></defs>
+      <ellipse cx="84" cy="194" rx="26" ry="4" fill="rgba(0,0,0,.2)"/>
+      <rect x="81" y="4" width="6" height="188" rx="3" fill="url(#barre)"/><ellipse cx="84" cy="192" rx="12" ry="3" fill="#9ca3af"/>
+      ${membre('M70 62 L81 40', skin, 7)}
+      ${membre('M64 106 L40 108 L38 138', bas, 10)}${membre('M66 110 L46 116 L50 144', bas, 10)}
+      <ellipse cx="37" cy="141" rx="6" ry="3.5" fill="#f8fafc" stroke="#94a3b8"/><ellipse cx="51" cy="147" rx="6" ry="3.5" fill="#f8fafc" stroke="#94a3b8"/>
+      <path d="M60 56 Q74 54 76 64 L72 102 Q66 112 58 104 L56 66 Z" fill="${top}"/>
+      <path d="M57 92 L73 92 L70 106 Q64 113 58 105 Z" fill="${bas}"/>
+      ${membre('M72 66 L81 74', skin, 7)}
+      <circle cx="82" cy="40" r="4.5" fill="${skin}"/><circle cx="82" cy="74" r="4.5" fill="${skin}"/>
+      <path d="M52 36 q-14 6 -10 22 q4 -10 12 -14 z" fill="${hair}"/>
+      <circle cx="64" cy="44" r="11" fill="${skin}"/>
+      <path d="M53 44 Q52 30 64 31 Q76 31 75 42 Q68 36 60 38 Q55 40 53 44 Z" fill="${hair}"/>
+      <ellipse cx="68" cy="45" rx="1.6" ry="2" fill="${A.yeux || '#3b2416'}"/><path d="M66 50 q3 2 6 0" stroke="#9a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg>`;
+  };
+  Z.fete = function () {
+    if (Math.random() >= (P.chance || 0.25)) return feteFeriel();
+    const t = Z.pick(P.phrases);
+    setTimeout(() => Z.speak(t, { pitch: 1.1 }), 1800);
+    return h('div', { class: 'card fete col center' }, h('div', { class: 'fete-pole' }, Z.svg(dessinPole(P.apparence || {}), 'pole-svg')),
+      h('div', { class: 'bubble' }, h('span', null, P.nom + ' : ' + t), Z.ear(t)));
+  };
+})();

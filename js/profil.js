@@ -43,20 +43,23 @@ var PROFIL = {
 
   id: 'brahim',
 
-  /* --- Brahim : 52 ans, petite barbe. Dessin PROVISOIRE (couleurs neutres),
-     en attendant la photo que Cécile doit envoyer. --- */
+  /* --- Brahim : 52 ans, cheveux grisonnants, petites lunettes rondes,
+     bouc et petite barbe bien taillée, grisonnants aussi ; habillé « chill »
+     (chemise ouverte sur un t-shirt). Description donnée par Cécile. --- */
   enfant: {
     pseudo: 'Brahim',
     genre: 'garçon',
     numero: 1,
     apparence: {
       peau: '#d9a77c',
-      cheveux: '#2b1d14',
+      cheveux: '#77716b',
       coiffure: 'courts',
       yeux: '#3b2416',
-      tshirt: '#0f766e',
-      veste: '#1f2937',
-      barbe: '#2b1d14'
+      tshirt: '#e5e7eb',
+      veste: '#4b6584',
+      barbe: '#9a948d',
+      bouc: '#6b655f',
+      lunettes: '#1f2937'
     }
   },
 
@@ -154,6 +157,19 @@ var PROFIL = {
       'Je suis fière de toi, Papa. On fête ça chez IKEA ? Je plaisante. Quoique.',
       'Bravo Papa ! Tu as gagné le droit de faire des frites.',
       'Un câlin pour le plus savant des papas. Même s\'il le sait déjà.']
+  },
+
+  /* --- De temps en temps (1 fête sur 4), Cécile apparaît, vite fait,
+     à la barre de pole fitness. Apparence PROVISOIRE : à compléter. --- */
+  pole: {
+    nom: 'Cécile',
+    chance: 0.25,
+    apparence: { peau: '#f1c7a5', cheveux: '#6b4423', yeux: '#3b2416', haut: '#0d9488', bas: '#1f2937' },
+    phrases: ['Bravo Brahim. Moi aussi, je travaille ma figure : la chaise.',
+      'Je passais par là. Bravo. Je repars.',
+      'Figure de la chaise. Risque évalué, prise vérifiée, document unique à jour.',
+      'Bravo Brahim. Chacun son samâ‘ : toi, les livres ; moi, la barre.',
+      'Tu as gagné. Moi aussi : j’ai tenu dix secondes.']
   },
 
   prononciation: { 'PSE': 'P S E', 'CAP': 'C A P', 'DUERP': 'D U E R P' },
