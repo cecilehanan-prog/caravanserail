@@ -477,30 +477,53 @@ Z.go('home');
 /* =========================================================
    APPLI DE BRAHIM : de temps en temps, quand la fête s'affiche,
    c'est Cécile qui apparaît, vite fait, à la barre de pole fitness
-   (figure de « la chaise »). Tenue de sport, dessin sobre.
+   (figure de « la chaise »). Tenue de pole : petit haut, short à paillettes,
+   pieds nus, guirlande de lumières.
    PROFIL.pole = { nom, chance, apparence, phrases }
    ========================================================= */
 (function () {
   const P = PROFIL.pole, feteFeriel = Z.fete;
   if (!P) return;
   const dessinPole = (A) => {
-    const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#6b4423', top = A.haut || '#0d9488', bas = A.bas || '#1f2937';
-    const membre = (d, c, w) => `<path d="${d}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+    const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#a47148', meche = A.meches || '#e9c46a';
+    const top = A.haut || '#ec4899', short = A.short || '#a21caf';
+    const membre = (d, w) => `<path d="${d}" stroke="${skin}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+    /* Guirlande de petites lumières en haut, et quelques-unes sur les côtés */
+    const COUL = ['#facc15', '#f472b6', '#38bdf8', '#a3e635', '#fb923c', '#c084fc'];
+    let lumieres = '<path d="M2 14 Q40 34 80 16 Q120 34 158 14" stroke="#475569" stroke-width="1" fill="none"/>';
+    [[8, 17], [20, 23], [33, 27], [46, 28], [59, 25], [71, 20], [90, 20], [102, 25], [115, 28], [128, 27], [141, 23], [152, 17]].forEach(([x, y], n) => {
+      lumieres += `<circle class="lumiere l${n % 3}" cx="${x}" cy="${y + 3}" r="3.2" fill="${COUL[n % COUL.length]}"/>`; });
+    [[10, 70], [150, 90], [14, 130], [146, 150], [8, 175], [152, 40]].forEach(([x, y], n) => {
+      lumieres += `<circle class="lumiere l${(n + 1) % 3}" cx="${x}" cy="${y}" r="2.6" fill="${COUL[(n + 2) % COUL.length]}"/>`; });
+    /* Paillettes du short */
+    const paillettes = [[59, 96], [63, 100], [67, 97], [61, 104], [66, 105], [70, 101], [57, 101]].map(([x, y], n) =>
+      `<circle cx="${x}" cy="${y}" r="1" fill="${n % 2 ? '#fde68a' : '#ffffff'}" opacity=".9"/>`).join('');
     return `<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="barre" x1="0" x2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset=".5" stop-color="#f9fafb"/><stop offset="1" stop-color="#6b7280"/></linearGradient></defs>
+      <defs>
+        <linearGradient id="barre" x1="0" x2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset=".5" stop-color="#f9fafb"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
+        <radialGradient id="iris"><stop offset="0" stop-color="#7a9a6a"/><stop offset=".55" stop-color="#6f8fa0"/><stop offset="1" stop-color="#8a96a3"/></radialGradient>
+      </defs>
+      ${lumieres}
       <ellipse cx="84" cy="194" rx="26" ry="4" fill="rgba(0,0,0,.2)"/>
-      <rect x="81" y="4" width="6" height="188" rx="3" fill="url(#barre)"/><ellipse cx="84" cy="192" rx="12" ry="3" fill="#9ca3af"/>
-      ${membre('M70 62 L81 40', skin, 7)}
-      ${membre('M64 106 L40 108 L38 138', bas, 10)}${membre('M66 110 L46 116 L50 144', bas, 10)}
-      <ellipse cx="37" cy="141" rx="6" ry="3.5" fill="#f8fafc" stroke="#94a3b8"/><ellipse cx="51" cy="147" rx="6" ry="3.5" fill="#f8fafc" stroke="#94a3b8"/>
-      <path d="M60 56 Q74 54 76 64 L72 102 Q66 112 58 104 L56 66 Z" fill="${top}"/>
-      <path d="M57 92 L73 92 L70 106 Q64 113 58 105 Z" fill="${bas}"/>
-      ${membre('M72 66 L81 74', skin, 7)}
-      <circle cx="82" cy="40" r="4.5" fill="${skin}"/><circle cx="82" cy="74" r="4.5" fill="${skin}"/>
-      <path d="M52 36 q-14 6 -10 22 q4 -10 12 -14 z" fill="${hair}"/>
+      <rect x="81" y="10" width="6" height="182" rx="3" fill="url(#barre)"/><ellipse cx="84" cy="192" rx="12" ry="3" fill="#9ca3af"/>
+      ${membre('M70 62 L81 40', 6)}
+      ${membre('M62 104 Q50 104 40 108 L37 138', 9.5)}${membre('M64 108 Q54 112 46 116 L49 144', 9.5)}
+      <path d="M33 140 q4 -3 9 0 q-4 3 -9 0 Z M45 146 q4 -3 9 0 q-4 3 -9 0 Z" fill="${skin}" stroke="#d4a27f" stroke-width=".8"/>
+      <path d="M60 56 Q74 54 76 64 L73 96 Q66 99 58 96 L56 66 Z" fill="${skin}"/>
+      <path d="M59 62 Q67 58 75 63 L74 76 Q66 79 58 76 Z" fill="${top}"/><path d="M62 62 L64 55 M72 62 L71 55" stroke="${top}" stroke-width="1.6"/>
+      <path d="M56 92 Q66 95 74 92 L72 104 L62 110 L56 104 Z" fill="${short}"/>${paillettes}
+      ${membre('M72 66 L81 74', 6)}
+      <circle cx="82" cy="40" r="4" fill="${skin}"/><circle cx="82" cy="74" r="4" fill="${skin}"/>
       <circle cx="64" cy="44" r="11" fill="${skin}"/>
-      <path d="M53 44 Q52 30 64 31 Q76 31 75 42 Q68 36 60 38 Q55 40 53 44 Z" fill="${hair}"/>
-      <ellipse cx="68" cy="45" rx="1.6" ry="2" fill="${A.yeux || '#3b2416'}"/><path d="M66 50 q3 2 6 0" stroke="#9a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M53 45 Q51 31 64 31 Q76 31 75 41 Q70 35 63 35 Q56 36 53 45 Z" fill="${hair}"/>
+      <path d="M57 36 Q62 33 68 33 M60 39 Q65 35 71 36" stroke="${meche}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="53" cy="30" r="7" fill="${hair}"/><circle cx="48" cy="26" r="3" fill="${hair}"/><circle cx="55" cy="23" r="3" fill="${hair}"/><circle cx="47" cy="32" r="2.6" fill="${hair}"/>
+      <path d="M49 28 q3 -3 6 0 M52 33 q3 -2 5 1" stroke="${meche}" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <path d="M54 46 q-3 5 0 8" stroke="${hair}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <circle cx="68.5" cy="45" r="2.3" fill="url(#iris)"/><circle cx="68.5" cy="45" r=".9" fill="#1f2937"/><circle cx="69.2" cy="44.3" r=".5" fill="#fff"/>
+      <path d="M66 40.8 q2.5 -1.2 5 0" stroke="${hair}" stroke-width="1" fill="none"/>
+      <path d="M66 50 q3 2.2 6 0" stroke="#be185d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="71" cy="48" r="2" fill="#f9a8d4" opacity=".5"/>
     </svg>`;
   };
   Z.fete = function () {

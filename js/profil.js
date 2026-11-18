@@ -160,11 +160,11 @@ var PROFIL = {
   },
 
   /* --- De temps en temps (1 fête sur 4), Cécile apparaît, vite fait,
-     à la barre de pole fitness. Apparence PROVISOIRE : à compléter. --- */
+     à la barre de pole fitness. Apparence décrite par Cécile. --- */
   pole: {
     nom: 'Cécile',
     chance: 0.25,
-    apparence: { peau: '#f1c7a5', cheveux: '#6b4423', yeux: '#3b2416', haut: '#0d9488', bas: '#1f2937' },
+    apparence: { peau: '#f1c7a5', cheveux: '#a47148', meches: '#e9c46a', haut: '#ec4899', short: '#a21caf' },  // châtain clair, mèches blondes, chignon bouclé ; yeux bleu-gris-vert
     phrases: ['Bravo Brahim. Moi aussi, je travaille ma figure : la chaise.',
       'Je passais par là. Bravo. Je repars.',
       'Figure de la chaise. Risque évalué, prise vérifiée, document unique à jour.',
