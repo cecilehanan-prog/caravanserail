@@ -81,7 +81,7 @@ var PROFIL = {
     voixDessinAnime: false
   },
 
-  style: { guides: true },
+  style: { guides: true, titreMotDuJour: '🤔 La pensée philosophique du jour' },
 
   /* --- Ses rubriques : aucune matière scolaire de base, quatre tuiles à lui --- */
   rubriques: {

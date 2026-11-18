@@ -154,7 +154,7 @@ Z.screens.home = function () {
     const L = Z.TON === 'college' ? ZDATA.citations : Z.TON === 'lycee' ? ZDATA.blagues : null;
     if (!L || !L.length || (PROFIL.style && PROFIL.style.motDuJour === false)) return null;
     const t = L[Z.dayNum() % L.length];
-    return h('div', { class: 'card mot-jour' }, h('b', null, Z.TON === 'lycee' ? '😏 La blague du jour' : '💬 La phrase du jour'), h('div', null, t), Z.ear(t));
+    return h('div', { class: 'card mot-jour' }, h('b', null, (PROFIL.style && PROFIL.style.titreMotDuJour) || (Z.TON === 'lycee' ? '😏 La blague du jour' : '💬 La phrase du jour')), h('div', null, t), Z.ear(t));
   })();
   const ready = d.games >= goal && !d.chest;
   const mission = h('div', { class: 'mission' },

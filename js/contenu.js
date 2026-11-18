@@ -9,26 +9,25 @@
    Dans les textes, on écrit l’apostrophe typographique ’ : pas besoin de \'.
    ========================================================= */
 
-/* ---------- L’humour à froid de l’appli (remplace celui du canevas) ---------- */
+/* ---------- La pensée philosophique du jour (une par jour), avec un commentaire à froid ----------
+   Seulement des citations sûres, avec leur source (« d’après » = traduction libre). */
 ZDATA.blagues = [
-  'Un professeur de PSE ne fait jamais de blague. Il fait une évaluation des risques de la blague.',
-  'Chez IKEA, Brahim ne se perd jamais. Il suit les flèches. Toutes. Deux fois.',
-  'Brahim ne fait pas des frites. Il conduit une réaction de Maillard sous air pulsé.',
-  'Les derviches tournent pour s’approcher de Dieu. Brahim tourne dans IKEA pour trouver la sortie. Le second cas est moins documenté.',
-  'Feriel a demandé ce qu’il y avait pour le dessert. Brahim a répondu : « Une analyse des causes. »',
-  'Il reste toujours une vis après le montage. C’est une vis témoin. Elle sert à l’arbre des causes.',
-  'Au restaurant, Brahim ne demande pas le menu. Il demande la fiche allergènes et le nom de la friteuse.',
-  'Le sans-gluten, c’est simple : tout ce qui est bon en contient, sauf ce que Brahim cuisine.',
-  'Rûmî a écrit plus de 25 000 vers. Brahim a lu la notice du lit MALM. Chacun son chemin.',
-  'En voyage, Brahim n’a qu’un bagage cabine. Et une valise entière de farine de riz.',
-  'Le document unique de la cuisine signale un risque majeur : Feriel qui goûte avant la fin.',
-  'La huppe a guidé trente oiseaux jusqu’au Sîmorgh. Le GPS n’a pas réussi à guider Brahim jusqu’au parking.',
-  'Brahim écoute de la musique soufie pour atteindre la paix intérieure. Puis il ouvre ses mails.',
-  'Brahim ne dit jamais « c’est dangereux ». Il dit « il y a une situation dangereuse, reste l’événement déclencheur ».',
-  'Le restaurant a dit que les frites étaient sans gluten. La friteuse, elle, n’a rien signé.',
-  'Une boulette de viande traverse le magasin. Personne ne la retient : elle n’est pas sans gluten.',
-  'Brahim n’a pas de crise existentielle. Il a un maqâm. Et un hâl, le lundi matin.',
-  'Les principes généraux de prévention sont neuf. Les excuses de Feriel pour ne pas ranger sa chambre, bien plus.'
+  '« Connais-toi toi-même. » (inscription du temple de Delphes) Brahim s’est connu. Il a confirmé ce qu’il pensait.',
+  '« Une vie sans examen ne vaut pas d’être vécue. » (Socrate, dans l’Apologie de Platon) Un professeur de PSE dirait : une vie sans évaluation des risques non plus.',
+  '« Tout le malheur des hommes vient d’une seule chose, qui est de ne savoir pas demeurer en repos dans une chambre. » (Pascal, Pensées) Pascal n’avait jamais vu le parcours fléché d’IKEA.',
+  '« Que sais-je ? » (la devise de Montaigne) Brahim, lui, sait. C’est ce qui inquiète son entourage.',
+  '« Ce qui trouble les hommes, ce ne sont pas les choses, mais les jugements qu’ils portent sur les choses. » (Épictète, Manuel) Exemple : une frite n’est pas triste. C’est l’huile de friteuse partagée qui l’est.',
+  '« Ce n’est pas parce que les choses sont difficiles que nous n’osons pas ; c’est parce que nous n’osons pas qu’elles sont difficiles. » (d’après Sénèque, Lettres à Lucilius) Valable aussi pour le montage d’une armoire.',
+  '« Le bon sens est la chose du monde la mieux partagée. » (Descartes, Discours de la méthode) Descartes n’a jamais corrigé de copies.',
+  '« Ne pas se moquer, ne pas déplorer, ne pas détester, mais comprendre. » (d’après Spinoza, Traité politique) La méthode de l’arbre des causes, en somme.',
+  '« Il faut imaginer Sisyphe heureux. » (Camus, Le Mythe de Sisyphe) Sisyphe faisait sans doute des frites en plusieurs fournées.',
+  '« Écoute la flûte de roseau : elle raconte, elle se plaint des séparations. » (d’après Rûmî, début du Masnavî) La nostalgie de l’origine. Ou d’un vol retour à prix raisonnable.',
+  '« Mon cœur est devenu capable d’accueillir toute forme. » (d’après Ibn ‘Arabî, L’Interprète des désirs) Comme une bibliothèque BILLY, mais sans limite de charge.',
+  '« On ne se baigne jamais deux fois dans le même fleuve. » (d’après Héraclite) Ni deux fois dans le même programme de PSE.',
+  '« L’homme n’est qu’un roseau, le plus faible de la nature ; mais c’est un roseau pensant. » (Pascal, Pensées) Le roseau, encore lui. Rûmî et Pascal auraient eu des choses à se dire.',
+  '« Je ne sais qu’une chose, c’est que je ne sais rien. » (tradition socratique) Brahim en sait au moins deux : celle-là, et où sont rangés les cadres RIBBA.',
+  '« Le sage ne dit pas ce qu’il sait, le sot ne sait pas ce qu’il dit. » (proverbe) Feriel attend de voir dans quelle catégorie tu te ranges aujourd’hui.',
+  '« Rien de trop. » (deuxième inscription de Delphes) Sauf les livres. Et les voyages. Et les frites.'
 ];
 ZDATA.praise = ['Exact.', 'Juste. Sans surprise.', 'Bonne réponse. On s’en doutait.', 'Correct. L’inspection n’a rien à ajouter.',
   'C’est ça. Il faudra trouver plus dur.', 'Parfait. Ça devient lassant.', 'Exact. Même la huppe est impressionnée.', 'Juste, et bien raisonné.'];
