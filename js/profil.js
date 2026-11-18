@@ -81,7 +81,7 @@ var PROFIL = {
     voixDessinAnime: false
   },
 
-  style: { guides: true, titreMotDuJour: '🤔 La pensée philosophique du jour' },
+  style: { guides: true, titreMotDuJour: '📿 La pensée soufie du jour' },
 
   /* --- Ses rubriques : aucune matière scolaire de base, quatre tuiles à lui --- */
   rubriques: {
@@ -112,7 +112,8 @@ var PROFIL = {
      La Huppe : l'oiseau qui guide les autres dans « La Conférence des oiseaux »
      de Farîd al-Dîn 'Attâr. Elle accueille et s'occupe du soufisme et de l'Escale.
      Prudence : une tortue préventrice (aucun accident déclaré, elle ne court jamais).
-     Feriel : sa fille. Elle présente les défis, la cuisine, et vient le féliciter.
+     Feriel : sa fille. Elle s'occupe de la cuisine et vient le féliciter.
+     Cécile : elle présente les défis de la semaine (chignon bouclé, mèches blondes).
      Dessin de Feriel provisoire, lui aussi. */
   animaux: [
     { id: 'huppe', nom: 'La Huppe', espece: 'oiseau', roles: ['accueil', 'soufisme', 'escale', 'mots'],
@@ -121,10 +122,14 @@ var PROFIL = {
     { id: 'prudence', nom: 'Prudence', espece: 'tortue', roles: ['pse', 'problemes', 'tables', 'parcours'],
       couleurs: { pelage: '#a3b18a', carapace: '#3f6212', bord: '#facc15', yeux: '#1f2937' },
       voix: { hauteur: 0.85, vitesse: 0.85 } },
-    { id: 'feriel', nom: 'Feriel', espece: 'humain', roles: ['devoirs', 'cuisine'],
+    { id: 'feriel', nom: 'Feriel', espece: 'humain', roles: ['cuisine'],
       appelle: 'Papa', presente: 'ma fille Feriel',
       couleurs: { peau: '#d9a77c', cheveux: '#2b1d14', coupe: 'longs', yeux: '#3b2416', tshirt: '#7c3aed', motif: '#ddd6fe' },
-      voix: { hauteur: 1.25, vitesse: 1.0 } }
+      voix: { hauteur: 1.25, vitesse: 1.0 } },
+    { id: 'cecile', nom: 'Cécile', espece: 'humain', roles: ['devoirs'],
+      appelle: 'Brahim',
+      couleurs: { peau: '#f1c7a5', cheveux: '#a47148', meches: '#e9c46a', coupe: 'chignon', yeux: '#6f8fa0', tshirt: '#ec4899', motif: '#fbcfe8' },
+      voix: { hauteur: 1.15, vitesse: 0.95 } }
   ],
 
   entourage: [

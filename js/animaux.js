@@ -136,6 +136,10 @@
         ${yeuxH}
         <path d="M60 56 q-3 7 1 8" stroke="#c08a6a" stroke-width="2" fill="none" stroke-linecap="round"/>
         ${barbe}${bouc}
+        ${k.coupe === 'chignon' ? `<circle cx="60" cy="17" r="10" fill="${k.cheveux}"/><circle cx="52" cy="13" r="4.5" fill="${k.cheveux}"/><circle cx="68" cy="12" r="4.5" fill="${k.cheveux}"/><circle cx="60" cy="8" r="4" fill="${k.cheveux}"/>
+          <path d="M54 15 q4 -4 9 -1 M57 20 q4 -3 8 0" stroke="${k.meches || k.cheveux}" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M44 34 Q54 26 66 28 M48 38 Q60 30 74 33" stroke="${k.meches || k.cheveux}" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M37 52 q-4 8 0 14 M83 52 q4 8 0 14" stroke="${k.cheveux}" stroke-width="2.4" fill="none" stroke-linecap="round"/>` : ''}
         ${k.coupe === 'boucles' ? [[-22, 45], [-19, 37], [-14, 30], [-7, 26], [1, 25], [8, 27], [15, 31], [19, 38], [-9, 31], [0, 29], [9, 31]].map(([x, y], n) => `<circle cx="${60 + x}" cy="${y}" r="4.8" fill="${n % 2 ? (k.cheveux2 || k.cheveux) : k.cheveux}"/>`).join('') : ''}
         ${k.lunettes && k.petitesLunettes ? `<circle cx="50" cy="54" r="5.8" fill="rgba(255,255,255,.2)" stroke="${k.lunettes}" stroke-width="1.8"/><circle cx="70" cy="54" r="5.8" fill="rgba(255,255,255,.2)" stroke="${k.lunettes}" stroke-width="1.8"/><path d="M56 53 q4 -2 8 0 M44 53 l-7 -1 M76 53 l7 -1" stroke="${k.lunettes}" stroke-width="1.8" fill="none"/>` : ''}
         ${k.lunettes && !k.petitesLunettes ? `<circle cx="50" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><circle cx="70" cy="54" r="8" fill="rgba(255,255,255,.25)" stroke="${k.lunettes}" stroke-width="2.5"/><path d="M58 54 h4 M42 53 l-5 -1 M78 53 l5 -1" stroke="${k.lunettes}" stroke-width="2.5"/>` : ''}

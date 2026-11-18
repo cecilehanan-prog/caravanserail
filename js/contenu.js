@@ -9,25 +9,26 @@
    Dans les textes, on écrit l’apostrophe typographique ’ : pas besoin de \'.
    ========================================================= */
 
-/* ---------- La pensée philosophique du jour (une par jour), avec un commentaire à froid ----------
-   Seulement des citations sûres, avec leur source (« d’après » = traduction libre). */
+/* ---------- La pensée soufie du jour (une par jour), avec un petit commentaire ----------
+   Textes et paroles bien attestés ; « d’après » = traduction libre ;
+   « selon la tradition » = parole attribuée, transmise par les recueils. */
 ZDATA.blagues = [
-  '« Connais-toi toi-même. » (inscription du temple de Delphes) Brahim s’est connu. Il a confirmé ce qu’il pensait.',
-  '« Une vie sans examen ne vaut pas d’être vécue. » (Socrate, dans l’Apologie de Platon) Un professeur de PSE dirait : une vie sans évaluation des risques non plus.',
-  '« Tout le malheur des hommes vient d’une seule chose, qui est de ne savoir pas demeurer en repos dans une chambre. » (Pascal, Pensées) Pascal n’avait jamais vu le parcours fléché d’IKEA.',
-  '« Que sais-je ? » (la devise de Montaigne) Brahim, lui, sait. C’est ce qui inquiète son entourage.',
-  '« Ce qui trouble les hommes, ce ne sont pas les choses, mais les jugements qu’ils portent sur les choses. » (Épictète, Manuel) Exemple : une frite n’est pas triste. C’est l’huile de friteuse partagée qui l’est.',
-  '« Ce n’est pas parce que les choses sont difficiles que nous n’osons pas ; c’est parce que nous n’osons pas qu’elles sont difficiles. » (d’après Sénèque, Lettres à Lucilius) Valable aussi pour le montage d’une armoire.',
-  '« Le bon sens est la chose du monde la mieux partagée. » (Descartes, Discours de la méthode) Descartes n’a jamais corrigé de copies.',
-  '« Ne pas se moquer, ne pas déplorer, ne pas détester, mais comprendre. » (d’après Spinoza, Traité politique) La méthode de l’arbre des causes, en somme.',
-  '« Il faut imaginer Sisyphe heureux. » (Camus, Le Mythe de Sisyphe) Sisyphe faisait sans doute des frites en plusieurs fournées.',
-  '« Écoute la flûte de roseau : elle raconte, elle se plaint des séparations. » (d’après Rûmî, début du Masnavî) La nostalgie de l’origine. Ou d’un vol retour à prix raisonnable.',
-  '« Mon cœur est devenu capable d’accueillir toute forme. » (d’après Ibn ‘Arabî, L’Interprète des désirs) Comme une bibliothèque BILLY, mais sans limite de charge.',
-  '« On ne se baigne jamais deux fois dans le même fleuve. » (d’après Héraclite) Ni deux fois dans le même programme de PSE.',
-  '« L’homme n’est qu’un roseau, le plus faible de la nature ; mais c’est un roseau pensant. » (Pascal, Pensées) Le roseau, encore lui. Rûmî et Pascal auraient eu des choses à se dire.',
-  '« Je ne sais qu’une chose, c’est que je ne sais rien. » (tradition socratique) Brahim en sait au moins deux : celle-là, et où sont rangés les cadres RIBBA.',
-  '« Le sage ne dit pas ce qu’il sait, le sot ne sait pas ce qu’il dit. » (proverbe) Feriel attend de voir dans quelle catégorie tu te ranges aujourd’hui.',
-  '« Rien de trop. » (deuxième inscription de Delphes) Sauf les livres. Et les voyages. Et les frites.'
+  '« Écoute la flûte de roseau : elle raconte, elle se plaint des séparations. » (d’après Rûmî, premier vers du Masnavî) Tout le Masnavî tient dans cette plainte.',
+  '« Quiconque est resté loin de son origine aspire au jour de l’union. » (d’après Rûmî, Masnavî, livre I) Le roseau veut retrouver sa roselière.',
+  'Sept vallées séparent les oiseaux du Sîmorgh : la quête, l’amour, la connaissance, le détachement, l’unité, la stupéfaction, le dénuement. (d’après ‘Attâr, La Conférence des oiseaux) Il n’y a pas de raccourci, même avec la huppe.',
+  'Des milliers d’oiseaux partent ; trente arrivent, et découvrent que « si morgh », trente oiseaux, c’est le Sîmorgh. (‘Attâr, La Conférence des oiseaux) Ce qu’ils cherchaient, c’était eux-mêmes, réunis.',
+  'Les papillons de nuit cherchent la flamme. Un seul la connaît vraiment : celui qui s’y jette. (d’après ‘Attâr, La Conférence des oiseaux) La différence entre savoir et goûter.',
+  '« Quelle différence entre connaître la définition de l’ivresse et être ivre ! » (d’après al-Ghazâlî, Erreur et délivrance) C’est le dhawq, le goût : la voie se vit, elle ne se récite pas.',
+  '« C’est par le rappel de Dieu que les cœurs se tranquillisent. » (Coran, sourate 13, verset 28) Le dhikr, cœur de toutes les voies.',
+  '« Adorer Dieu comme si tu Le voyais ; car si tu ne Le vois pas, Lui te voit. » (le hadith de Gabriel, sur l’ihsân) La définition la plus courte du chemin.',
+  '« Si je T’adore par crainte de l’enfer, brûle-moi en enfer ; si je T’adore pour le paradis, prive-m’en ; mais si je T’adore pour Toi seul, ne me prive pas de Ta beauté. » (Rabi‘a, selon la tradition) L’amour pur, sans calcul.',
+  '« Le soufisme, c’est que Dieu te fasse mourir à toi-même, et vivre en Lui. » (d’après al-Junayd, cité par al-Qushayrî) Le fanâ’, puis le baqâ’.',
+  '« Mon cœur est devenu capable d’accueillir toute forme… Je professe la religion de l’amour. » (d’après Ibn ‘Arabî, L’Interprète des désirs) Un cœur sans étagère trop petite.',
+  '« L’un des signes qu’on s’appuie sur ses œuvres, c’est de perdre espoir quand on a fauté. » (d’après Ibn ‘Atâ’ Allâh, première des Hikam) On s’appuie sur Dieu, pas sur son bulletin.',
+  'Dans le noir, des hommes touchent un éléphant : l’un dit « un tuyau », l’autre « un éventail », l’autre « un pilier ». (d’après Rûmî, Masnavî, livre III) Chacun a raison sur une partie. Aucun ne voit le tout.',
+  '« Le soufisme est aujourd’hui un nom sans réalité ; autrefois, c’était une réalité sans nom. » (Abû al-Hasan Fûshanjî, cité par al-Hujwîrî) Déjà au XIe siècle, on regrettait le bon vieux temps.',
+  '« Anâ al-Haqq » : « Je suis la Vérité ». (al-Hallâj) Une parole qui a fait couler mille ans d’encre, et un peu de sang.',
+  'La huppe dit aux oiseaux qu’elle connaît le chemin, et qu’il est long. (d’après ‘Attâr, La Conférence des oiseaux) Elle n’a jamais promis que ce serait facile. Ni qu’il y aurait une cafétéria.'
 ];
 ZDATA.praise = ['Exact.', 'Juste. Sans surprise.', 'Bonne réponse. On s’en doutait.', 'Correct. L’inspection n’a rien à ajouter.',
   'C’est ça. Il faudra trouver plus dur.', 'Parfait. Ça devient lassant.', 'Exact. Même la huppe est impressionnée.', 'Juste, et bien raisonné.'];
