@@ -477,17 +477,59 @@ Z.go('home');
 /* =========================================================
    APPLI DE BRAHIM : de temps en temps, quand la fête s'affiche,
    c'est Cécile qui apparaît, vite fait, à la barre de pole fitness
-   (figure de « la chaise »). Tenue de pole : petit haut, short à paillettes,
+   (six figures, au hasard : chaise, pompier, assise, inversion,
+   drapeau, étoile). Tenue de pole : petit haut, short à paillettes,
    pieds nus, guirlande de lumières.
    PROFIL.pole = { nom, chance, apparence, phrases }
    ========================================================= */
 (function () {
   const P = PROFIL.pole, feteFeriel = Z.fete;
   if (!P) return;
-  const dessinPole = (A) => {
+  /* Les figures : les points du corps (épaules, hanches, mains, genoux, pieds) dans un cadre 160 × 200.
+     La barre est en x = 84. Le buste et la tête suivent la ligne épaules → hanches. */
+  const FIGURES = {
+    chaise: { nom: 'la chaise', ep: [68, 60], ha: [64, 104], m1: [81, 40], m2: [81, 74], g1: [40, 108], g2: [46, 116], p1: [37, 138], p2: [49, 144],
+      phrases: ['Figure : la chaise. Risque évalué, prise vérifiée, document unique à jour.', 'Bravo Brahim. Moi, je m’assieds dans le vide. Toi, sur tes lauriers.'] },
+    pompier: { nom: 'le pompier', ep: [62, 64], ha: [70, 106], m1: [81, 40], m2: [38, 72], g1: [90, 120], g2: [88, 128], p1: [72, 144], p2: [68, 152],
+      phrases: ['Figure : le pompier. On tourne autour de la barre, comme un derviche, mais en descendant.', 'Le pompier, Brahim. Pour éteindre l’incendie de ta réussite.'] },
+    assise: { nom: 'l’assise', ep: [77, 54], ha: [83, 94], m1: [46, 44], m2: [114, 40], g1: [102, 102], g2: [100, 108], p1: [98, 130], p2: [72, 128],
+      phrases: ['Figure : l’assise, les bras ouverts. Les mains lâchent la barre. Ne fais pas ça avec ton iPhone.', 'Assise sur la barre, sans les mains. Comme toi devant un QCM.'] },
+    inversion: { nom: 'l’inversion en V', ep: [80, 100], ha: [84, 62], m1: [83, 96], m2: [83, 124], g1: [64, 42], g2: [104, 42], p1: [50, 22], p2: [118, 22],
+      phrases: ['Figure : l’inversion en V. La tête en bas, comme le monde quand Feriel range sa chambre.', 'Bravo Brahim. Moi, je vois ta réussite à l’envers. Elle reste belle.'] },
+    drapeau: { nom: 'le drapeau', ep: [78, 66], ha: [44, 68], m1: [82, 48], m2: [82, 88], g1: [26, 62], g2: [26, 72], p1: [8, 58], p2: [8, 76],
+      phrases: ['Figure : le drapeau. Le corps à l’horizontale. Les principes généraux de prévention, eux, restent debout.', 'Le drapeau humain, Brahim. Je le hisse pour toi.'] },
+    etoile: { nom: 'l’étoile', ep: [76, 58], ha: [86, 98], m1: [82, 40], m2: [48, 82], g1: [104, 116], g2: [64, 120], p1: [124, 132], p2: [44, 142],
+      phrases: ['Figure : l’étoile. Une main, une jambe sur la barre, le reste en éventail.', 'L’étoile, Brahim. Comme celle de la huppe qui guide vers le Sîmorgh. En plus sportif.'] }
+  };
+  const dessinPole = (A, F) => {
     const skin = A.peau || '#f1c7a5', hair = A.cheveux || '#7a5230', meche = A.meches || '#e9c46a';
     const top = A.haut || '#ec4899', short = A.short || '#a21caf';
-    const membre = (d, w) => `<path d="${d}" stroke="${skin}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+    const trait = (a, b, w) => `<path d="M${a[0]} ${a[1]} L${b[0]} ${b[1]}" stroke="${skin}" stroke-width="${w}" stroke-linecap="round"/>`;
+    const jambe = (g, p) => `<path d="M${F.ha[0]} ${F.ha[1]} L${g[0]} ${g[1]} L${p[0]} ${p[1]}" stroke="${skin}" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="${p[0]}" cy="${p[1]}" r="3.6" fill="${skin}"/>`;
+    /* Le buste, dessiné droit puis tourné selon la ligne épaules → hanches */
+    const dx = F.ha[0] - F.ep[0], dy = F.ha[1] - F.ep[1], L = Math.hypot(dx, dy);
+    const ang = Math.atan2(dy, dx) * 180 / Math.PI - 90;
+    const sens = dx > 6 ? -1 : 1;   // la tête regarde vers la barre
+    const paillettes = [[-5, -9], [-1, -5], [3, -8], [-3, -1], [2, 0], [6, -4], [-7, -4]].map(([x, y], n) =>
+      `<circle cx="${x}" cy="${L + y}" r="1" fill="${n % 2 ? '#fde68a' : '#ffffff'}" opacity=".9"/>`).join('');
+    const buste = `<g transform="translate(${F.ep[0]} ${F.ep[1]}) rotate(${ang.toFixed(1)})">
+      <path d="M-9 -2 Q0 -5 9 -2 L8 ${L - 6} Q0 ${L - 2} -8 ${L - 6} Z" fill="${skin}"/>
+      <path d="M-9 2 Q0 -2 9 2 L9 15 Q0 18 -9 15 Z" fill="${top}"/><path d="M-5 2 L-4 -5 M5 2 L4 -5" stroke="${top}" stroke-width="1.6"/>
+      <path d="M-9 ${L - 10} Q0 ${L - 7} 9 ${L - 10} L8 ${L + 3} L0 ${L + 7} L-8 ${L + 3} Z" fill="${short}"/>${paillettes}
+      <rect x="-3.5" y="-9" width="7" height="8" fill="${skin}"/>
+      <g transform="translate(0 -18) scale(${sens} 1)">
+        <circle cx="-9" cy="-12" r="7" fill="${hair}"/><circle cx="-14" cy="-16" r="3" fill="${hair}"/><circle cx="-7" cy="-19" r="3" fill="${hair}"/><circle cx="-15" cy="-10" r="2.6" fill="${hair}"/>
+        <path d="M-13 -14 q3 -3 6 0 M-10 -9 q3 -2 5 1" stroke="${meche}" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="0" r="11" fill="${skin}"/>
+        <path d="M-11 1 Q-13 -13 0 -13 Q12 -13 11 -3 Q6 -9 -1 -9 Q-8 -8 -11 1 Z" fill="${hair}"/>
+        <path d="M-7 -8 Q-2 -11 4 -11 M-4 -5 Q1 -9 7 -8" stroke="${meche}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M-10 2 q-3 5 0 8" stroke="${hair}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <circle cx="4.5" cy="1" r="2.3" fill="url(#iris)"/><circle cx="4.5" cy="1" r=".9" fill="#1f2937"/><circle cx="5.2" cy=".3" r=".5" fill="#fff"/>
+        <path d="M2 -3.2 q2.5 -1.2 5 0" stroke="${hair}" stroke-width="1" fill="none"/>
+        <path d="M2 6 q3 2.2 6 0" stroke="#be185d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="7" cy="4" r="2" fill="#f9a8d4" opacity=".5"/>
+      </g>
+    </g>`;
     /* Guirlande de petites lumières en haut, et quelques-unes sur les côtés */
     const COUL = ['#facc15', '#f472b6', '#38bdf8', '#a3e635', '#fb923c', '#c084fc'];
     let lumieres = '<path d="M2 14 Q40 34 80 16 Q120 34 158 14" stroke="#475569" stroke-width="1" fill="none"/>';
@@ -495,9 +537,6 @@ Z.go('home');
       lumieres += `<circle class="lumiere l${n % 3}" cx="${x}" cy="${y + 3}" r="3.2" fill="${COUL[n % COUL.length]}"/>`; });
     [[10, 70], [150, 90], [14, 130], [146, 150], [8, 175], [152, 40]].forEach(([x, y], n) => {
       lumieres += `<circle class="lumiere l${(n + 1) % 3}" cx="${x}" cy="${y}" r="2.6" fill="${COUL[(n + 2) % COUL.length]}"/>`; });
-    /* Paillettes du short */
-    const paillettes = [[59, 96], [63, 100], [67, 97], [61, 104], [66, 105], [70, 101], [57, 101]].map(([x, y], n) =>
-      `<circle cx="${x}" cy="${y}" r="1" fill="${n % 2 ? '#fde68a' : '#ffffff'}" opacity=".9"/>`).join('');
     return `<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="barre" x1="0" x2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset=".5" stop-color="#f9fafb"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
@@ -506,31 +545,18 @@ Z.go('home');
       ${lumieres}
       <ellipse cx="84" cy="194" rx="26" ry="4" fill="rgba(0,0,0,.2)"/>
       <rect x="81" y="10" width="6" height="182" rx="3" fill="url(#barre)"/><ellipse cx="84" cy="192" rx="12" ry="3" fill="#9ca3af"/>
-      ${membre('M70 62 L81 40', 6)}
-      ${membre('M62 104 Q50 104 40 108 L37 138', 9.5)}${membre('M64 108 Q54 112 46 116 L49 144', 9.5)}
-      <path d="M33 140 q4 -3 9 0 q-4 3 -9 0 Z M45 146 q4 -3 9 0 q-4 3 -9 0 Z" fill="${skin}" stroke="#d4a27f" stroke-width=".8"/>
-      <path d="M60 56 Q74 54 76 64 L73 96 Q66 99 58 96 L56 66 Z" fill="${skin}"/>
-      <path d="M59 62 Q67 58 75 63 L74 76 Q66 79 58 76 Z" fill="${top}"/><path d="M62 62 L64 55 M72 62 L71 55" stroke="${top}" stroke-width="1.6"/>
-      <path d="M56 92 Q66 95 74 92 L72 104 L62 110 L56 104 Z" fill="${short}"/>${paillettes}
-      ${membre('M72 66 L81 74', 6)}
-      <circle cx="82" cy="40" r="4" fill="${skin}"/><circle cx="82" cy="74" r="4" fill="${skin}"/>
-      <circle cx="64" cy="44" r="11" fill="${skin}"/>
-      <path d="M53 45 Q51 31 64 31 Q76 31 75 41 Q70 35 63 35 Q56 36 53 45 Z" fill="${hair}"/>
-      <path d="M57 36 Q62 33 68 33 M60 39 Q65 35 71 36" stroke="${meche}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <circle cx="53" cy="30" r="7" fill="${hair}"/><circle cx="48" cy="26" r="3" fill="${hair}"/><circle cx="55" cy="23" r="3" fill="${hair}"/><circle cx="47" cy="32" r="2.6" fill="${hair}"/>
-      <path d="M49 28 q3 -3 6 0 M52 33 q3 -2 5 1" stroke="${meche}" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-      <path d="M54 46 q-3 5 0 8" stroke="${hair}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      <circle cx="68.5" cy="45" r="2.3" fill="url(#iris)"/><circle cx="68.5" cy="45" r=".9" fill="#1f2937"/><circle cx="69.2" cy="44.3" r=".5" fill="#fff"/>
-      <path d="M66 40.8 q2.5 -1.2 5 0" stroke="${hair}" stroke-width="1" fill="none"/>
-      <path d="M66 50 q3 2.2 6 0" stroke="#be185d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <circle cx="71" cy="48" r="2" fill="#f9a8d4" opacity=".5"/>
+      ${trait(F.ep, F.m1, 6)}${jambe(F.g2, F.p2)}${buste}${jambe(F.g1, F.p1)}${trait(F.ep, F.m2, 6)}
+      <circle cx="${F.m1[0]}" cy="${F.m1[1]}" r="4" fill="${skin}"/><circle cx="${F.m2[0]}" cy="${F.m2[1]}" r="4" fill="${skin}"/>
     </svg>`;
   };
+  Z.figuresPole = FIGURES;
+  Z.dessinPole = dessinPole;
   Z.fete = function () {
     if (Math.random() >= (P.chance || 0.5)) return feteFeriel();
-    const t = Z.pick(P.phrases);
+    const F = FIGURES[Z.pick(Object.keys(FIGURES))];
+    const t = Math.random() < 0.6 ? Z.pick(F.phrases) : Z.pick(P.phrases);
     setTimeout(() => Z.speak(t, { pitch: 1.1 }), 1800);
-    return h('div', { class: 'card fete col center' }, h('div', { class: 'fete-pole' }, Z.svg(dessinPole(P.apparence || {}), 'pole-svg')),
+    return h('div', { class: 'card fete col center' }, h('div', { class: 'fete-pole' }, Z.svg(dessinPole(P.apparence || {}, F), 'pole-svg')),
       h('div', { class: 'bubble' }, h('span', null, P.nom + ' : ' + t), Z.ear(t)));
   };
 })();

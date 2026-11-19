@@ -171,9 +171,8 @@ var PROFIL = {
     nom: 'Cécile',
     chance: 0.5,
     apparence: { peau: '#f1c7a5', cheveux: '#7a5230', meches: '#e9c46a', haut: '#ec4899', short: '#a21caf' },  // châtain, mèches blondes, chignon bouclé ; yeux bleu-gris-vert
-    phrases: ['Bravo Brahim. Moi aussi, je travaille ma figure : la chaise.',
+    phrases: ['Bravo Brahim. Moi aussi, je travaille mes figures.',
       'Je passais par là. Bravo. Je repars.',
-      'Figure de la chaise. Risque évalué, prise vérifiée, document unique à jour.',
       'Bravo Brahim. Chacun son samâ‘ : toi, les livres ; moi, la barre.',
       'Tu as gagné. Moi aussi : j’ai tenu dix secondes.']
   },
