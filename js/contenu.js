@@ -351,3 +351,230 @@ window.ZCONTENU = {
       ] }
   ]
 };
+
+/* =========================================================
+   LES PALIERS : facile → moyen → expert
+   ---------------------------------------------------------
+   Chaque activité ci-dessus est découpée en trois paliers :
+   • facile : les questions dont le numéro est dans « facile » ;
+   • moyen  : les autres (pour les paires : toute la liste) ;
+   • expert : de nouvelles questions, pointues, ci-dessous.
+   Le moteur ouvre le palier suivant à 80 % de réussite du premier coup.
+   Faits vérifiés ; « d’après » = traduction libre.
+   ========================================================= */
+(function () {
+  const EXPERT = {
+    'soufisme:notions': [
+      { q: 'Les trois degrés de la certitude, tirés du Coran, sont…', choix: ['‘Ilm al-yaqîn, ‘ayn al-yaqîn, haqq al-yaqîn : la science, l’œil, la vérité de la certitude', 'Islâm, îmân, ihsân', 'Sharî‘a, tarîqa, haqîqa'], explication: 'Sourate 102 (versets 5 et 7) et sourate 56, verset 95. On illustre souvent : savoir qu’il y a du feu, le voir, s’y brûler.' },
+      { q: 'Qabd et bast désignent…', choix: ['La contraction et la dilatation du cœur : deux états qui alternent', 'L’aller et le retour du pèlerinage', 'Le jeûne et la rupture du jeûne'], explication: 'Ce sont des états (ahwâl), au-dessus de la crainte (khawf) et de l’espérance (rajâ’).' },
+      { q: 'Chez Ibn ‘Arabî, le tajallî est…', choix: ['La manifestation de Dieu dans les formes : la théophanie', 'La retraite de quarante jours', 'Le serment d’allégeance au maître'], explication: 'Chaque chose est un lieu où un nom divin se manifeste. Henry Corbin a beaucoup travaillé cette notion.' },
+      { q: 'Les a‘yân thâbita, chez Ibn ‘Arabî, sont…', choix: ['Les « entités immuables » : les choses telles qu’elles sont dans la science divine, avant d’exister', 'Les sept cieux', 'Les maîtres de la chaîne initiatique'], explication: 'Une notion clé des Fusûs al-hikam, souvent traduite par « essences immuables » ou « archétypes ».' },
+      { q: 'La triade sharî‘a, tarîqa, haqîqa décrit…', choix: ['La loi, la voie et la réalité : trois niveaux d’une même religion', 'Trois confréries rivales', 'Trois prières de la nuit'], explication: 'Pour les soufis, la voie ne remplace pas la loi : elle la suppose et l’approfondit.' },
+      { q: 'Al-Hârith al-Muhâsibî (mort en 857) doit son nom à…', choix: ['La muhâsaba : l’examen de conscience', 'Sa ville natale', 'Son métier de comptable'], explication: 'Il examinait ses intentions sans relâche. Il fut l’un des maîtres d’al-Junayd.' }
+    ],
+    'soufisme:lexique': [['Qabd', 'La contraction du cœur'], ['Bast', 'La dilatation du cœur'], ['Tajallî', 'La théophanie, la manifestation divine'], ['Muhâsaba', 'L’examen de conscience'],
+      ['Murâqaba', 'La vigilance contemplative'], ['Jam‘', 'Le rassemblement, l’union'], ['Farq', 'La séparation, la distinction'], ['Ghayba', 'L’absence à soi-même']],
+    'soufisme:maitres': [
+      { q: 'Qui était l’oncle et le maître d’al-Junayd ?', choix: ['Sarî al-Saqatî', 'Ma‘rûf al-Karkhî', 'Dhû al-Nûn al-Misrî'], explication: 'Sarî al-Saqatî, à Bagdad. Lui-même avait fréquenté Ma‘rûf al-Karkhî.' },
+      { q: 'Quel maître égyptien (mort en 861) est associé à la ma‘rifa, la connaissance intime ?', choix: ['Dhû al-Nûn al-Misrî', 'Ibn ‘Atâ’ Allâh', 'Al-Shâdhilî'], explication: 'On lui attribue d’avoir donné sa place centrale à la ma‘rifa dans le vocabulaire soufi.' },
+      { q: 'Shihâb al-Dîn Yahyâ al-Suhrawardî, exécuté à Alep en 1191, est…', choix: ['Le « maître de l’illumination » (Shaykh al-Ishrâq), et non le fondateur de la Suhrawardiyya', 'Le fondateur de la confrérie Suhrawardiyya', 'Un disciple de Rûmî'], explication: 'Piège classique : la confrérie vient d’Abû al-Najîb et d’Abû Hafs ‘Umar al-Suhrawardî, deux autres Suhrawardî.' },
+      { q: 'Najm al-Dîn Kubrâ, fondateur de la Kubrawiyya, est mort…', choix: ['En 1221, pendant l’attaque mongole sur le Khwarezm', 'À Konya, en 1273', 'À Damas, en 1240'], explication: 'Il est connu pour ses descriptions des lumières colorées perçues par le mystique.' },
+      { q: 'Qui fut le disciple et beau-fils d’Ibn ‘Arabî, installé à Konya au temps de Rûmî ?', choix: ['Sadr al-Dîn al-Qûnawî', 'Sultan Walad', 'Shams de Tabriz'], explication: 'Il a beaucoup fait pour la diffusion et l’interprétation des œuvres d’Ibn ‘Arabî.' },
+      { q: 'Rûzbehân Baqlî de Shiraz (mort en 1209) a écrit un traité traduit par Henry Corbin sous le titre…', choix: ['« Le Jasmin des fidèles d’amour »', '« Le Tabernacle des lumières »', '« Le Livre des haltes »'], explication: 'Un traité sur l’amour humain comme chemin vers l’amour divin. Le Tabernacle est d’al-Ghazâlî, les Haltes de l’émir Abdelkader.' },
+      { q: 'Ahmad Sirhindî est surnommé…', choix: ['« Le rénovateur du second millénaire » (Mujaddid-i alf-i thânî)', '« Le pôle de Bagdad »', '« Le sultan des amoureux »'], explication: 'Maître naqshbandi en Inde moghole. Sa branche s’appelle la Mujaddidiyya.' }
+    ],
+    'soufisme:oeuvres': [['Al-Sarrâj', 'Kitâb al-Luma‘'], ['Al-Kalâbâdhî', 'Kitâb al-Ta‘arruf'], ['Abû Tâlib al-Makkî', 'Qût al-qulûb, la nourriture des cœurs'], ['‘Abd al-Karîm al-Jîlî', 'Al-Insân al-kâmil'],
+      ['Shihâb al-Dîn Yahyâ al-Suhrawardî', 'Hikmat al-ishrâq'], ['Abû Hafs ‘Umar al-Suhrawardî', '‘Awârif al-ma‘ârif'], ['Jâmî', 'Nafahât al-uns'], ['Al-Hallâj', 'Kitâb al-Tawâsîn']],
+    'soufisme:frise': [['Dhû al-Nûn (861)', 'Al-Junayd (910)', 'Al-Sarrâj (988)', 'Al-Qushayrî (1072)', 'Rûzbehân Baqlî (1209)', 'Najm al-Dîn Kubrâ (1221)', 'Ibn ‘Arabî (1240)', 'Jâmî (1492)', 'Ahmad Sirhindî (1624)']],
+    'soufisme:textes': [
+      { q: 'Quel recueil de Rûmî rassemble ses ghazals, signés du nom de son maître ?', choix: ['Le Dîwân-e Shams-e Tabrîzî', 'Le Masnavî', 'Fîhi mâ fîhi'], explication: 'Rûmî signe ses poèmes du nom de Shams : l’élève s’efface dans le maître.' },
+      { q: '« Fîhi mâ fîhi » (« Le Livre du dedans ») est…', choix: ['Un recueil d’entretiens de Rûmî, en prose', 'Un traité d’Ibn ‘Arabî', 'Un poème de ‘Attâr'], explication: 'Des propos tenus devant ses disciples, mis par écrit.' },
+      { q: 'Pour qui Ibn ‘Arabî a-t-il écrit « L’Interprète des désirs » (Tarjumân al-ashwâq) ?', choix: ['Pour Nizâm, la fille d’un maître persan rencontré à La Mecque', 'Pour le sultan de Damas', 'Pour sa mère'], explication: 'Accusé d’avoir écrit des poèmes d’amour profane, il en a rédigé un commentaire mystique.' },
+      { q: 'Quelle œuvre de ‘Attâr est la source de nombreux récits sur Rabi‘a ?', choix: ['Le Mémorial des saints (Tadhkirat al-awliyâ’)', 'La Conférence des oiseaux', 'Le Livre divin'], explication: 'Un recueil de vies de saints, en persan.' },
+      { q: '« Le Tabernacle des lumières » (Mishkât al-anwâr) d’al-Ghazâlî commente…', choix: ['Le verset de la Lumière (sourate 24, verset 35)', 'La sourate Al-Fâtiha', 'Le verset du Trône'], explication: '« Dieu est la Lumière des cieux et de la terre… »' },
+      { q: 'Combien de chapitres comptent les « Fusûs al-hikam » d’Ibn ‘Arabî ?', choix: ['27, chacun consacré à un prophète', '114, comme les sourates', '7, comme les cieux'], explication: 'D’Adam à Muhammad : chaque prophète est le « chaton » d’une sagesse.' },
+      { q: 'Selon une formule attribuée à Jâmî, le Masnavî est…', choix: ['« Le Coran en langue persane »', '« Le Livre des rois »', '« Le Jardin des roses »'], explication: 'Le « Livre des rois » est de Ferdowsî ; le « Jardin des roses » (Golestân), de Saadi.' }
+    ],
+    'soufisme:voies': [
+      { q: 'La Naqshbandiyya fait passer sa chaîne principale par…', choix: ['Abû Bakr', '‘Alî', '‘Umar'], explication: 'C’est une exception : la plupart des voies remontent au Prophète par ‘Alî.' },
+      { q: '« Khalwat dar anjuman », principe naqshbandi, veut dire…', choix: ['La retraite au milieu de la foule', 'La retraite au désert', 'Le chant en assemblée'], explication: 'Être intérieurement avec Dieu tout en restant dans le monde. Ce principe est attribué à ‘Abd al-Khâliq Ghujduwânî.' },
+      { q: 'Dans le samâ‘ mevlevi, le haut bonnet de feutre (sikke) symbolise…', choix: ['La pierre tombale de l’ego', 'La couronne du sultan', 'Le minaret'], explication: 'La robe blanche représente le linceul ; le manteau noir qu’on retire, la tombe.' },
+      { q: 'De quelle voie la ‘Alawiyya de Mostaganem est-elle une branche ?', choix: ['De la Darqâwiyya, elle-même branche de la Shâdhiliyya', 'De la Qâdiriyya', 'De la Tijâniyya'], explication: 'La Darqâwiyya vient de Mawlây al-‘Arabî al-Darqâwî, mort en 1823.' },
+      { q: 'Le roi Idris de Libye était le chef de quelle confrérie ?', choix: ['La Sanûsiyya', 'La Mouridiyya', 'La Bektachiyya'], explication: 'Fondée par Muhammad ibn ‘Alî al-Sanûsî au XIXe siècle.' },
+      { q: 'Uthmân dan Fodio, fondateur du califat de Sokoto au début du XIXe siècle, appartenait à…', choix: ['La Qâdiriyya', 'La Naqshbandiyya', 'La Mevleviyya'], explication: 'La Qâdiriyya a joué un grand rôle en Afrique de l’Ouest, avant l’essor de la Tijâniyya.' }
+    ],
+    'soufisme:histoire': [
+      { recto: 'Quel penseur du XIVe siècle a écrit un traité sur le soufisme, « Shifâ’ al-sâ’il » ?', verso: 'Ibn Khaldûn.', choix: ['Ibn Khaldûn', 'Ibn Battûta', 'Ibn Rushd', 'Ibn Sînâ'] },
+      { recto: 'Qui a protégé des milliers de chrétiens pendant les massacres de Damas, en 1860 ?', verso: 'L’émir Abdelkader.', choix: ['L’émir Abdelkader', 'Ahmad al-‘Alawî', 'Le sultan ottoman', 'Amadou Bamba'] },
+      { recto: 'Sous quel nom René Guénon est-il mort au Caire, en 1951 ?', verso: '‘Abd al-Wâhid Yahyâ.', choix: ['‘Abd al-Wâhid Yahyâ', '‘Abd al-Qâdir', 'Muhammad Asad', 'Isâ Nûr al-Dîn'] },
+      { recto: 'Qui a écrit « Mystical Dimensions of Islam » (1975) ?', verso: 'Annemarie Schimmel.', choix: ['Annemarie Schimmel', 'Henry Corbin', 'William Chittick', 'Louis Massignon'] },
+      { recto: 'Qui a écrit « Le Sceau des saints », sur la sainteté chez Ibn ‘Arabî ?', verso: 'Michel Chodkiewicz (1986).', choix: ['Michel Chodkiewicz', 'Éric Geoffroy', 'Eva de Vitray-Meyerovitch', 'Henry Corbin'] },
+      { recto: 'Avant Ibn ‘Arabî, qui avait écrit sur le « sceau des saints » (khatm al-awliyâ’) ?', verso: 'Al-Hakîm al-Tirmidhî, au IXe siècle.', choix: ['Al-Hakîm al-Tirmidhî', 'Al-Ghazâlî', 'Al-Junayd', 'Rabi‘a'] }
+    ],
+    'soufisme:haut-vol': [
+      { q: 'Pourquoi la condamnation de Shihâb al-Dîn Yahyâ al-Suhrawardî (1191) est-elle souvent rapprochée de celle d’al-Hallâj ?', choix: ['Deux mystiques exécutés pour des raisons à la fois doctrinales et politiques', 'Ils sont morts la même année', 'Ils appartenaient à la même confrérie'], explication: 'On l’appelle d’ailleurs parfois al-Maqtûl, « le tué ».' },
+      { q: 'Wahdat al-shuhûd, selon Sirhindî, veut dire que…', choix: ['L’unité est vécue dans la contemplation, sans que les créatures soient identiques à Dieu', 'Tout est Dieu, sans distinction', 'La contemplation est interdite'], explication: 'Sirhindî corrige ainsi une lecture moniste de l’unicité de l’être.' },
+      { q: 'Dans la doctrine des noms divins d’Ibn ‘Arabî, l’Homme parfait est…', choix: ['Le miroir où se reflètent tous les noms divins', 'Le plus savant en droit', 'Celui qui n’a jamais péché'], explication: 'D’où le chapitre sur Adam au début des Fusûs.' },
+      { q: 'Dans la Risâla d’al-Qushayrî, la différence entre maqâm et hâl est surtout…', choix: ['L’un s’acquiert par l’effort (makâsib), l’autre est un don (mawâhib)', 'L’un est réservé aux femmes', 'L’un se pratique seul, l’autre en groupe'], explication: 'Le hâl vient et s’en va ; le maqâm reste.' },
+      { q: 'Dans le Masnavî, l’histoire de l’éléphant dans le noir montre…', choix: ['Que chacun ne saisit qu’une partie de la réalité', 'Que les éléphants sont sacrés', 'Qu’il faut voyager en Inde'], explication: 'Avec une bougie, dit Rûmî, les divergences auraient disparu.' }
+    ],
+    'pse:programme': [
+      { q: 'Combien de modules compte la thématique C en CAP ?', choix: ['Huit (C1 à C8)', 'Six (C1 à C6)', 'Douze (C1 à C12)'], explication: 'De C1 « Les différents contrats de travail » à C8 « La gestion des situations d’urgence ».' },
+      { q: 'En CAP, quel est le module C1 ?', choix: ['Les différents contrats de travail', 'Les enjeux de la santé et sécurité au travail', 'Le suivi médical des salariés'], explication: 'En bac pro, le C1 est « Les enjeux de la santé et sécurité au travail » : même lettre, autre contenu.' },
+      { q: 'En terminale bac pro, B5 s’intitule…', choix: ['Les ressources en énergie et le développement durable', 'Le bruit au quotidien', 'Les risques majeurs'], explication: 'Le bruit au quotidien est le module B4 du CAP.' },
+      { q: 'Quelle vidéo de l’INRS le programme de terminale propose-t-il pour la responsabilité de l’employeur (C8) ?', choix: ['« L’affaire Berthier »', '« Napo dans… »', '« TutoPrev’-Accueil »'], explication: 'TutoPrev’-Accueil est cité en seconde, pour le module C2.' },
+      { q: 'Le module C11 de terminale mobilise quelles notions ?', choix: ['Travail réel / travail prescrit, activité / tâche, déterminants', 'Budget, assurance, achats', 'Antigène, anticorps, mémoire immunitaire'], explication: 'C’est l’ergonomie : on analyse l’écart entre ce qui est demandé et ce qui est fait.' },
+      { q: 'Dans le programme de CAP, le module C6 cite le « salarié compétent ». Pour quoi faire ?', choix: ['La protection et la prévention des risques professionnels (PPRP)', 'Le secourisme uniquement', 'La représentation syndicale'], explication: 'Le même module cite les IPRP du service de santé au travail.' }
+    ],
+    'pse:notions-base': [['Prévention intrinsèque', 'Supprimer le danger dès la conception'], ['Protection collective', 'Un garde-corps, un capotage'], ['Protection individuelle', 'Des bouchons d’oreille'],
+      ['VLEP', 'Valeur limite d’exposition professionnelle'], ['Prévention secondaire', 'Repérer tôt : le dépistage'], ['Prévention tertiaire', 'Limiter les séquelles']],
+    'pse:processus': [
+      ['Recueillir les faits', 'Construire l’arbre des causes', 'Rechercher des mesures de prévention', 'Choisir et mettre en œuvre les mesures', 'Suivre et évaluer leur efficacité'],
+      ['Identifier les dangers', 'Analyser les risques', 'Classer et hiérarchiser les risques', 'Proposer des actions de prévention', 'Transcrire dans le document unique', 'Mettre à jour']
+    ],
+    'pse:reglementation': [
+      { q: 'Quel article du Code du travail fonde le droit de retrait du salarié ?', choix: ['L4131-1', 'L4121-2', 'R4541-9'], explication: 'Le salarié peut se retirer d’une situation dont il a un motif raisonnable de penser qu’elle présente un danger grave et imminent.' },
+      { q: 'Depuis la loi du 2 août 2021, combien de temps faut-il conserver les versions du DUERP ?', choix: ['40 ans', '5 ans', '10 ans'], explication: 'Pour garder la trace des expositions, utile notamment pour les maladies qui apparaissent tard.' },
+      { q: 'Bruit : quelle est la valeur limite d’exposition en niveau de crête ?', choix: ['140 dB(C)', '120 dB(A)', '135 dB(A)'], explication: '135 dB(C) et 137 dB(C) sont les valeurs d’action. La limite (protections comprises) est 140 dB(C).' },
+      { q: 'Port manuel de charges : la limite habituelle pour un homme adulte (sans avis médical) est…', choix: ['55 kg', '25 kg', '105 kg'], explication: 'Article R4541-9. 105 kg avec un avis d’aptitude du médecin du travail ; pour une femme, 25 kg.' },
+      { q: 'Une maladie hors tableau peut être reconnue si l’incapacité atteint au moins…', choix: ['25 %, après avis du CRRMP', '10 %, sans condition', '50 %, après un procès'], explication: 'Le comité régional de reconnaissance des maladies professionnelles doit établir un lien direct et essentiel avec le travail.' },
+      { q: 'Les arrêts « amiante » de la Cour de cassation, qui définissent la faute inexcusable, datent de…', choix: ['2002', '1976', '2017'], explication: '28 février 2002 : l’employeur a une obligation de sécurité « de résultat », formule qui a évolué depuis.' },
+      { q: 'Quel article du Code du travail donne au représentant du personnel au CSE un droit d’alerte en cas de danger grave et imminent ?', choix: ['L4131-2', 'L4131-1', 'L1152-1'], explication: 'L4131-1 : le droit de retrait du salarié. L1152-1 : le harcèlement moral.' }
+    ],
+    'pse:acteurs': [
+      { recto: 'Qui donne un avis sur les maladies professionnelles hors tableau ?', verso: 'Le CRRMP : comité régional de reconnaissance des maladies professionnelles.', choix: ['Le CRRMP', 'Le CSE', 'L’INRS', 'L’ANACT'] },
+      { recto: 'Quel organisme régional a remplacé la DIRECCTE en 2021 ?', verso: 'La DREETS : direction régionale de l’économie, de l’emploi, du travail et des solidarités.', choix: ['La DREETS', 'La CARSAT', 'L’ARS', 'La DDPP'] },
+      { recto: 'Quelle agence fait l’expertise scientifique pour fixer les VLEP ?', verso: 'L’ANSES.', choix: ['L’ANSES', 'L’INRS', 'Santé publique France', 'La HAS'] },
+      { recto: 'Où siège l’Agence européenne pour la sécurité et la santé au travail (EU-OSHA) ?', verso: 'À Bilbao, en Espagne.', choix: ['À Bilbao', 'À Bruxelles', 'À Genève', 'À Strasbourg'] },
+      { recto: 'Quelle agence surveille l’état de santé de la population, y compris au travail ?', verso: 'Santé publique France.', choix: ['Santé publique France', 'L’ANSES', 'La CARSAT', 'L’OPPBTP'] }
+    ],
+    'pse:arbre': [
+      { q: 'Dans l’arbre des causes, on distingue les faits permanents et…', choix: ['Les faits inhabituels, appelés « variations »', 'Les faits graves', 'Les faits contestés'], explication: 'Les variations par rapport au travail habituel sont souvent le point de départ de l’accident.' },
+      { q: 'Qui doit participer à la construction de l’arbre ?', choix: ['Un groupe : la victime si possible, des témoins, l’encadrement, le CSE…', 'L’employeur seul', 'L’assureur'], explication: 'Le travail en groupe évite les interprétations et rapproche des faits réels.' },
+      { q: 'Les « facteurs potentiels d’accidents » servent à…', choix: ['Généraliser : repérer les mêmes causes ailleurs avant qu’un accident n’arrive', 'Calculer l’indemnité', 'Désigner un responsable'], explication: 'On passe de l’analyse d’un accident à la prévention de beaucoup d’autres.' },
+      { q: 'Quelle méthode l’INRS a-t-elle développée dans les années 1970 ?', choix: ['La méthode de l’arbre des causes', 'La méthode HACCP', 'La méthode des 5 pourquoi'], explication: 'HACCP vient de l’agroalimentaire ; les 5 pourquoi, de l’industrie japonaise.' }
+    ],
+    'pse:sante': [
+      { q: 'Quelle bactérie se développe même au réfrigérateur ?', choix: ['Listeria monocytogenes', 'Salmonella', 'Aucune'], explication: 'Elle supporte le froid : c’est pour ça qu’on respecte les DLC et qu’on nettoie le réfrigérateur.' },
+      { q: 'Le « paquet hygiène » européen s’applique depuis…', choix: ['Le 1er janvier 2006', 'Le 1er janvier 1993', 'Le 1er janvier 2015'], explication: 'Il rend obligatoire une démarche fondée sur les principes HACCP.' },
+      { q: 'Combien de principes compte la méthode HACCP ?', choix: ['Sept', 'Cinq', 'Dix'], explication: 'Du premier, « analyser les dangers », au septième, « tenir des documents ».' },
+      { q: 'Quelle hormone du sommeil est freinée par la lumière, en particulier la lumière bleue ?', choix: ['La mélatonine', 'L’adrénaline', 'L’insuline'], explication: 'Les écrans le soir retardent l’endormissement.' },
+      { q: 'Dans le cerveau, les drogues agissent sur le circuit de la récompense en libérant surtout…', choix: ['De la dopamine', 'De l’insuline', 'Du cortisol seulement'], explication: 'Le noyau accumbens est au centre de ce circuit.' },
+      { q: 'Quelle vaccination est obligatoire pour certains professionnels de santé exposés ?', choix: ['L’hépatite B', 'La grippe', 'La rage'], explication: 'Article L3111-4 du Code de la santé publique.' }
+    ],
+    'pse:indicateurs': [
+      { q: 'Indice de fréquence : 12 accidents avec arrêt pour 400 salariés. Quel est l’indice ?', reponse: 30,
+        aide: 'IF = accidents avec arrêt × 1 000 ÷ effectif.', solution: '12 × 1 000 ÷ 400 = 30 accidents pour 1 000 salariés.' },
+        { q: 'Deux machines font chacune 80 dB(A). Quel niveau sonore quand elles tournent ensemble ?', reponse: 83, unite: 'dB(A)',
+        aide: 'Les décibels ne s’additionnent pas : deux sources égales, c’est + 3 dB.', solution: '80 + 3 = 83 dB(A), et non 160.' },
+      { q: 'Et quatre machines de 80 dB(A) ?', reponse: 86, unite: 'dB(A)',
+        aide: 'Doubler encore : + 3 dB de plus.', solution: '2 machines : 83 dB(A) ; 4 machines : 86 dB(A).' }
+    ],
+    'cuisine:gluten': [
+      { q: 'La maladie cœliaque est…', choix: ['Une maladie auto-immune déclenchée par le gluten', 'Une allergie passagère', 'Une simple intolérance digestive sans lésion'], explication: 'Elle abîme les villosités de l’intestin grêle.' },
+      { q: 'Quel examen sanguin sert en premier pour la dépister ?', choix: ['Les anticorps anti-transglutaminase (IgA)', 'La glycémie', 'Le cholestérol'], explication: 'Le diagnostic est ensuite confirmé par une biopsie de l’intestin.' },
+      { q: 'Quels gènes sont presque toujours présents chez les personnes cœliaques ?', choix: ['HLA-DQ2 ou HLA-DQ8', 'BRCA1', 'Aucun gène connu'], explication: 'Mais beaucoup de personnes porteuses ne seront jamais malades.' },
+      { q: 'Quelle part de la population est cœliaque, environ ?', choix: ['1 %', '10 %', '0,01 %'], explication: 'Beaucoup ne sont pas diagnostiquées.' },
+      { q: 'Dans le pain sans gluten, quel ingrédient remplace souvent l’élasticité du gluten ?', choix: ['Le psyllium ou la gomme xanthane', 'Le sel', 'Le sucre'], explication: 'Ils retiennent l’eau et donnent de la tenue à la pâte.' },
+      { q: 'L’épeautre et le kamut sont…', choix: ['Des espèces de blé', 'Des céréales sans gluten', 'Des légumineuses'], explication: 'Ce sont des Triticum, comme le blé tendre : ils contiennent du gluten.' }
+    ],
+    'cuisine:farines': [['Teff', 'L’injera éthiopienne'], ['Riz gluant', 'Le mochi japonais'], ['Maïs nixtamalisé (masa)', 'La tortilla de maïs'], ['Semoule de manioc fermentée', 'L’attiéké ivoirien'], ['Farine de pois chiche', 'La panisse marseillaise'], ['Riz et lentilles noires (urad dal)', 'L’idli d’Inde du Sud']],
+    'cuisine:airfryer': [
+      { q: 'L’acrylamide se forme à partir…', choix: ['D’un acide aminé, l’asparagine, et de sucres', 'Des graisses de l’huile', 'Du sel'], explication: 'C’est une réaction voisine de celle de Maillard.' },
+      { q: 'Que se passe-t-il quand on « blanchit » les frites avant de les dorer ?', choix: ['L’amidon cuit (il se gélatinise) : le cœur devient fondant', 'Les frites deviennent blanches', 'Le gluten disparaît'], explication: 'Puis la seconde cuisson, plus chaude, fait la croûte.' },
+      { q: 'Pourquoi la surface doit-elle être sèche pour bien dorer ?', choix: ['Tant qu’il reste de l’eau, la surface ne dépasse pas 100 °C', 'L’eau fait gonfler les frites', 'Pour des raisons d’hygiène'], explication: 'Il faut d’abord évaporer l’eau pour atteindre la température de la réaction de Maillard.' }
+    ],
+    'cuisine:recettes': [
+      ['Chauffer le lait, l’huile et le sel jusqu’à frémissement', 'Verser sur la fécule de manioc et mélanger', 'Laisser tiédir', 'Ajouter l’œuf, puis le fromage râpé', 'Former des petites boules', 'Cuire à 170 °C environ 15 minutes']
+    ],
+    'cuisine:proportions': [
+      { q: 'Une pâte sans gluten : 300 g de farine, hydratation à 75 %. Combien d’eau ?', reponse: 225, unite: 'g',
+        aide: '75 % de 300.', solution: '300 × 0,75 = 225 g d’eau.' },
+      { q: 'Une recette au four dure 25 minutes. À l’air fryer, tu réduis le temps de 20 %. Combien de minutes ?', reponse: 20, unite: 'min',
+        aide: '20 % de 25 = 5.', solution: '25 − 5 = 20 minutes.' },
+      { q: 'Une cuillère à soupe d’huile fait environ 15 ml. Combien de ml pour 3 cuillères ?', reponse: 45, unite: 'ml',
+        aide: '3 × 15.', solution: '45 ml.' }
+    ],
+    'cuisine:epices': [
+      { recto: 'L’advieh est un mélange d’épices…', verso: 'D’Iran.', choix: ['D’Iran', 'Du Japon', 'Du Mexique', 'D’Éthiopie'] },
+      { recto: 'Le panch phoron (cinq graines) vient…', verso: 'Du Bengale (Inde et Bangladesh).', choix: ['Du Bengale', 'Du Maroc', 'De Chine', 'Du Liban'] },
+      { recto: 'Le shichimi tōgarashi (sept épices) vient…', verso: 'Du Japon.', choix: ['Du Japon', 'De Corée', 'D’Inde', 'De Turquie'] },
+      { recto: 'La chermoula est…', verso: 'Une marinade du Maghreb (coriandre, persil, ail, cumin, citron).', choix: ['Une marinade du Maghreb', 'Un dessert turc', 'Une sauce japonaise', 'Un pain éthiopien'] },
+      { recto: 'Le baharat (« épices », en arabe) est un mélange…', verso: 'Du Proche et du Moyen-Orient.', choix: ['Du Proche et du Moyen-Orient', 'D’Amérique du Sud', 'D’Asie du Sud-Est', 'D’Europe du Nord'] }
+    ],
+    'escale:lieux': [
+      { q: 'Où se trouve le tombeau de Hâfez, la Hâfezieh ?', choix: ['À Shiraz', 'À Ispahan', 'À Tabriz'], explication: 'On y vient réciter ses poèmes, et parfois ouvrir son Divan au hasard.' },
+      { q: 'Où se trouve le mausolée de Khoja Ahmad Yasawî, bâti sous Tamerlan ?', choix: ['À Turkestan, au Kazakhstan', 'À Samarcande', 'À Boukhara'], explication: 'Il est inscrit au patrimoine mondial de l’UNESCO depuis 2003.' },
+      { q: 'Où repose Bahâ’ al-Dîn Naqshband ?', choix: ['Près de Boukhara, en Ouzbékistan', 'À Konya', 'À Delhi'], explication: 'Un grand lieu de pèlerinage d’Asie centrale.' },
+      { q: 'Où se trouve le tombeau de Sîdî Bû Madyan (Abû Madyan) ?', choix: ['À Tlemcen, en Algérie (El Eubbad)', 'À Fès', 'À Tunis'], explication: 'Le maître andalou est mort près de Tlemcen en 1198.' },
+      { q: 'Où repose Shâh Ni‘matullâh Walî ?', choix: ['À Mâhân, près de Kerman, en Iran', 'À Shiraz', 'À Mashhad'], explication: 'Fondateur de la Ni‘matullâhiyya, l’une des grandes voies iraniennes.' },
+      { q: 'Où repose Farîd al-Dîn ‘Attâr ?', choix: ['À Nishapur, en Iran', 'À Bagdad', 'À Konya'], explication: 'Dans la même ville qu’Omar Khayyâm.' }
+    ],
+    'escale:battuta': [
+      { q: 'Quel est le titre complet de la Rihla, en résumé ?', choix: ['« Présent à ceux qui contemplent les curiosités des villes et les merveilles des voyages »', '« Le Livre des rois »', '« Les Prairies d’or »'], explication: 'Tuhfat al-nuzzâr fî gharâ’ib al-amsâr wa ‘ajâ’ib al-asfâr. « Les Prairies d’or » sont d’al-Mas‘ûdî.' },
+      { q: 'Quel grand port chinois Ibn Battûta appelle-t-il « Zaytûn » ?', choix: ['Quanzhou', 'Shanghai', 'Canton'], explication: 'C’était l’un des plus grands ports du monde au XIVe siècle.' },
+      { q: 'Les chercheurs ont montré que certains passages de la Rihla…', choix: ['Reprennent le récit de voyage d’Ibn Jubayr, un siècle plus tôt', 'Ont été ajoutés au XIXe siècle', 'Sont traduits du chinois'], explication: 'C’est probablement le travail du rédacteur, Ibn Juzayy.' },
+      { q: 'En quelle année Ibn Battûta revient-il pour de bon au Maroc, avant de dicter son récit ?', choix: ['Vers 1354', 'Vers 1325', 'Vers 1400'], explication: 'Après un dernier voyage au Mali. La dictée se fait à Fès en 1355-1356.' }
+    ],
+    'escale:musique': [
+      { q: 'Combien de parties (selâm) compte la cérémonie du samâ‘ mevlevi ?', choix: ['Quatre', 'Deux', 'Sept'], explication: 'Chaque selâm a son sens, jusqu’à la soumission complète.' },
+      { q: 'Qui est considéré par la tradition comme le père du qawwali ?', choix: ['Amîr Khusraw, disciple de Nizâmuddîn Awliyâ’', 'Nusrat Fateh Ali Khan', 'Bulleh Shah'], explication: 'Poète et musicien de Delhi, aux XIIIe et XIVe siècles.' },
+      { q: 'Dans quel livre de l’Ihyâ’ al-Ghazâlî traite-t-il de l’écoute de la musique ?', choix: ['Le livre des règles du samâ‘ et de l’extase (wajd)', 'Le livre de la prière', 'Le livre du mariage'], explication: 'Il y défend le samâ‘ sous conditions : le temps, le lieu, les compagnons.' },
+      { q: 'Les petites timbales de la musique mevlevie s’appellent…', choix: ['Les kudüm', 'Les darbouka', 'Les tabla'], explication: 'Elles accompagnent le ney dans les ayin, les compositions de la cérémonie.' },
+      { q: 'En quelle année Oum Kalthoum est-elle morte ?', choix: ['En 1975', 'En 1964', 'En 1990'], explication: 'Ses funérailles, au Caire, ont réuni une foule immense.' }
+    ],
+    'escale:lectures': [
+      { recto: 'Qui a écrit « Le Jardin des roses » (Golestân, 1258) ?', verso: 'Saadi de Shiraz.', choix: ['Saadi', 'Hâfez', 'Omar Khayyâm', 'Ferdowsî'] },
+      { recto: 'Qui a écrit « Layla et Majnûn » et « Les Sept Portraits » ?', verso: 'Nizâmî de Gandja, au XIIe siècle.', choix: ['Nizâmî', 'Jâmî', 'Rûmî', '‘Attâr'] },
+      { recto: 'Qui a écrit « Hayy ibn Yaqzân », un roman philosophique d’al-Andalus ?', verso: 'Ibn Tufayl, au XIIe siècle.', choix: ['Ibn Tufayl', 'Ibn Hazm', 'Ibn Rushd', 'Ibn Battûta'] },
+      { recto: 'Qui a écrit « Le Livre des avares » ?', verso: 'Al-Jâhiz, au IXe siècle, à Bassora.', choix: ['Al-Jâhiz', 'Ibn al-Muqaffa‘', 'Abû Nuwâs', 'Al-Tabarî'] },
+      { recto: 'Que fait-on avec le Divan de Hâfez, en Iran ?', verso: 'On l’ouvre au hasard pour y lire un présage : le fâl-e Hâfez.', choix: ['On l’ouvre au hasard pour un présage', 'On le récite à l’envers', 'On le brûle au Nouvel An', 'On le traduit en arabe'] }
+    ],
+    'escale:restaurant': [
+      { q: 'Quel texte rend obligatoire, en France, l’information sur les allergènes dans les plats non préemballés ?', choix: ['Le décret du 17 avril 2015', 'La loi Évin', 'Le règlement de 1993'], explication: 'Il applique le règlement européen INCO (n° 1169/2011).' },
+      { q: 'La mention « peut contenir des traces de gluten »…', choix: ['Est volontaire : aucune règle ne l’encadre précisément', 'Est obligatoire et contrôlée', 'Garantit moins de 20 mg/kg'], explication: 'Elle signale un risque de contamination, sans seuil légal.' },
+      { q: 'Les soba japonaises…', choix: ['Mêlent souvent sarrasin et farine de blé', 'Sont toujours 100 % sarrasin', 'Sont faites de riz'], explication: 'Les « ni-hachi soba » : 20 % de blé, 80 % de sarrasin. Il faut demander des « jûwari soba », 100 % sarrasin.' },
+      { q: 'Les frites surgelées « extra-croustillantes »…', choix: ['Sont parfois enrobées d’une pâte à base de farine de blé', 'Sont toujours sans gluten', 'Ne contiennent que de la pomme de terre'], explication: 'On lit la liste des ingrédients. Ou on fait ses frites soi-même.' }
+    ],
+    'escale:ikea': [
+      { q: 'Où a ouvert le premier magasin IKEA, en 1958 ?', choix: ['À Älmhult, en Suède', 'À Stockholm', 'À Oslo'], explication: 'Le musée IKEA y a ouvert en 2016.' },
+      { q: 'D’où vient, selon l’histoire de l’entreprise, l’idée des meubles en kit ?', choix: ['Un employé a démonté les pieds d’une table pour la faire entrer dans une voiture', 'D’un concours d’architectes', 'D’une loi suédoise'], explication: 'C’est Gillis Lundgren, le même qui a dessiné BILLY.' },
+      { q: 'En quelle année est mort Ingvar Kamprad ?', choix: ['En 2018', 'En 1999', 'En 2023'], explication: 'Il était né en 1926.' }
+    ]
+  };
+  const FACILE = {
+    'soufisme:notions': [0, 1, 2, 5, 6, 11], 'soufisme:lexique': [0, 1, 2, 3], 'soufisme:maitres': [0, 3, 4, 5, 6, 7], 'soufisme:oeuvres': [0, 1, 2, 7],
+    'soufisme:textes': [0, 1, 2, 3], 'soufisme:voies': [0, 3, 6, 7], 'soufisme:histoire': [0, 1, 4], 'soufisme:haut-vol': [4, 5],
+    'pse:programme': [0, 1, 2, 3], 'pse:notions-base': [0, 1, 3, 4], 'pse:processus': [0], 'pse:reglementation': [0, 1, 2, 3, 5], 'pse:acteurs': [0, 1, 2],
+    'pse:arbre': [0, 1, 4], 'pse:sante': [0, 1, 6], 'pse:indicateurs': [0, 1],
+    'cuisine:gluten': [0, 1, 2, 8], 'cuisine:farines': [0, 1, 4], 'cuisine:airfryer': [0, 1, 4, 5], 'cuisine:recettes': [0], 'cuisine:proportions': [0, 2], 'cuisine:epices': [0, 1, 2],
+    'escale:lieux': [0, 2, 4], 'escale:battuta': [0, 2], 'escale:musique': [0, 1, 2], 'escale:lectures': [0, 2, 5], 'escale:restaurant': [0, 3], 'escale:ikea': [0, 2, 3]
+  };
+  const CLE = { qcm: 'questions', calcul: 'questions', paires: 'paires', ordre: 'series', cartes: 'cartes' };
+  for (const rid in window.ZCONTENU) window.ZCONTENU[rid].forEach(a => {
+    const k = rid + ':' + a.id, cle = CLE[a.type];
+    if (!cle || !EXPERT[k]) return;
+    const tout = a[cle], f = FACILE[k] || [];
+    let facile = tout.filter((_, i) => f.includes(i)), moyen = a.type === 'paires' ? tout : tout.filter((_, i) => !f.includes(i));
+    /* La frise : 5 dates au palier facile, les 8 au palier moyen */
+    if (k === 'soufisme:frise') { facile = [tout[0].filter((_, i) => [0, 1, 3, 5, 6].includes(i))]; moyen = tout; }
+    a.paliers = [{ [cle]: facile }, { [cle]: moyen }, { [cle]: EXPERT[k] }];
+    delete a[cle];
+  });
+
+  /* ---------- Les activités à débloquer ---------- */
+  window.ZCONTENU.soufisme.push({ id: 'sept-vallees', type: 'ordre', titre: 'Les sept vallées des oiseaux', notion: 'La Conférence des oiseaux', niveauMin: 3, icone: '🪶',
+    consigne: 'La huppe annonce aux oiseaux sept vallées avant le Sîmorgh. Remets-les dans l’ordre.',
+    rappel: 'D’après ‘Attâr : la quête, l’amour, la connaissance, le détachement, l’unité, la stupéfaction, et enfin le dénuement et l’anéantissement.',
+    series: [['La quête', 'L’amour', 'La connaissance', 'Le détachement', 'L’unité', 'La stupéfaction', 'Le dénuement et l’anéantissement']] });
+  window.ZCONTENU.pse.push({ id: 'cas-arbre', type: 'qcm', titre: 'Cas pratique : l’accident de l’atelier', notion: 'Arbre des causes', niveauMin: 5, icone: '🌳',
+    consigne: 'Un cas inventé pour l’entraînement. Un apprenti se coupe la main en nettoyant une trancheuse en cuisine.',
+    rappel: 'Les faits relevés : la trancheuse est restée branchée ; le carter de protection était démonté ; l’apprenti nettoyait seul ; le chef était en livraison ; c’était un jour de forte activité.',
+    questions: [
+      { q: 'Lequel est un fait, et non une interprétation ?', choix: ['Le carter de protection était démonté', 'L’apprenti n’a pas fait attention', 'Le chef est négligent'], explication: 'On note ce qu’on peut constater, sans jugement.' },
+      { q: 'Quel fait est une « variation » (un fait inhabituel) ?', choix: ['Le chef était en livraison', 'La trancheuse coupe', 'On nettoie la trancheuse chaque soir'], explication: 'D’habitude, le chef est là : son absence change la situation.' },
+      { q: '« La trancheuse branchée » et « le carter démonté » ont été tous les deux nécessaires. C’est…', choix: ['Une conjonction', 'Un enchaînement', 'Une disjonction'], explication: 'Plusieurs faits nécessaires ensemble pour en produire un autre : une conjonction.' },
+      { q: 'Quelle mesure est la plus haute dans la hiérarchie de la prévention ?', choix: ['Une trancheuse qui ne peut pas fonctionner sans son carter (sécurité intégrée)', 'Des gants anti-coupure', 'Une affiche « Attention, ça coupe »'], explication: 'Agir sur la machine passe avant la protection individuelle et l’information.' },
+      { q: 'Quel facteur potentiel d’accident peut-on généraliser à toute la cuisine ?', choix: ['Le nettoyage des machines sous tension', 'La couleur de la trancheuse', 'Le jour de la semaine'], explication: 'On vérifie la même chose pour le hachoir, le batteur, le mixeur…' }
+    ] });
+})();
